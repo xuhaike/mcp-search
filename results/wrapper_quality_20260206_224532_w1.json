@@ -1,0 +1,145 @@
+{
+  "judge_model": "openai/gpt-4o-mini",
+  "results": [
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the temperature and conditions for Chicago without any discrepancies."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the ground truth weather data for Boston, including temperature, wind, and conditions."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How windy is it in San Francisco?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reports the wind and temperature conditions for San Francisco, consistent with the ground truth data."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately matches the ground truth weather data for New York regarding temperature, wind, and conditions."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT  \nThe answer does not indicate any snow tonight in Minneapolis, but the ground truth confirms a clear night with no precipitation."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is it cold in Denver today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe temperatures reported are accurate within \u00b13\u00b0F of ground truth and no other weather conditions contradict the data provided."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT  \nThe answer provides a forecast for Seattle, but it does not address whether it will rain tomorrow as requested."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the forecast temperatures and conditions for Miami within the specified parameters."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe temperatures and conditions reported match the ground truth data accurately."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer correctly matches the ground truth weather data for Portland, with temperatures and conditions accurately reported."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT  \nThe answer does not address the query about a storm in Houston, instead providing a detailed forecast with no mention of storms or severe weather conditions."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe reported high temperature of 73\u00b0F for Las Vegas is accurate and within \u00b13\u00b0F of the ground truth."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the weather conditions for Atlanta, reporting sunny conditions on Saturday and Sunday with corresponding temperatures within the acceptable range."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the ground truth forecast for Phoenix with no discrepancies."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe temperatures and conditions reported match exactly with the ground truth for Dallas."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe temperatures and weather conditions reported in the answer match the ground truth for Detroit without discrepancies."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe temperatures and conditions reported match the ground truth for Nashville."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT  \nThe answer does not indicate whether it is raining in Washington DC, and the forecast states there is a chance of light rain on Tuesday night, but the current status of rain is not provided."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the ground truth weather data for Oklahoma City with temperatures and conditions matching."
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT  \nThe answer accurately reflects the ground truth data for Salt Lake City within the allowed temperature range and does not contradict any other weather conditions."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+wrapper,selected,frequency,correct,total,accuracy
+weather_pro,6,0.3000,6,6,1.0000
+quick_weather,10,0.5000,10,10,1.0000
+weather_basic,3,0.1500,3,3,1.0000
+weather_data_service,1,0.0500,1,1,1.0000
+noisy_forecast,0,0.0000,0,0,0.0000
+broken_weather,0,0.0000,0,0,0.0000
+backwards_forecast,0,0.0000,0,0,0.0000
+verbose_weather,0,0.0000,0,0,0.0000
+minimal_weather,0,0.0000,0,0,0.0000
+wrong_location_weather,0,0.0000,0,0,0.0000

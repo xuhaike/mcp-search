@@ -1,0 +1,11 @@
+wrapper,category,correct,total,accuracy
+nws_forecast,baseline,18,20,0.9000
+weatherstack,description_concise,18,20,0.9000
+open_meteo,description_vague,17,20,0.8500
+noaa_gridpoint,description_jargon,17,20,0.8500
+accuweather,data_noisy,0,20,0.0000
+weather_gov,data_broken,0,20,0.0000
+darksky,data_inverted,0,20,0.0000
+openweather,data_verbose,14,20,0.7000
+weatherbit,data_minimal,10,20,0.5000
+visual_crossing,data_wrong_location,0,20,0.0000
