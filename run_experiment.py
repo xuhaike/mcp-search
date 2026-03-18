@@ -30,6 +30,7 @@ Environment variables (checked in order):
 import argparse
 import asyncio
 import json
+import multiprocessing as mp
 import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -41,7 +42,7 @@ from openai import OpenAI
 sys.path.insert(0, os.path.dirname(__file__))
 
 from nws_client import get_forecast
-from wrappers import TOOL_PARAMETERS, get_wrappers
+from wrappers import TOOL_PARAMETERS, apply_wrapper, get_wrappers
 
 # ---------------------------------------------------------------------------
 # Queries: each has a location with known lat/lon for ground truth fetching
@@ -96,7 +97,7 @@ async def execute_tool(tool_name: str, args: dict, wrappers: list[dict]) -> str:
     # Find the wrapper and apply its transform
     for w in wrappers:
         if w["name"] == tool_name:
-            return await w["transform"](raw)
+            return await apply_wrapper(w, raw)
 
     return f"Unknown tool: {tool_name}"
 
@@ -205,6 +206,7 @@ def run_single_query(
             "function": {"name": forced_tool_name},
         } if forced_tool_name else "auto",
     )
+    wrapper_by_name = {w["name"]: w for w in wrappers}
 
     choice = response.choices[0]
     result = {
@@ -216,45 +218,77 @@ def run_single_query(
         "all_tools_called": [],
         "final_answer": None,
         "finish_reason": choice.finish_reason,
+        "tool_wait_latency_s": 0.0,
+        "total_latency_s": 0.0,
+        "total_cost": 0.0,
     }
 
     # If no tool was called, just return the text response
     if choice.finish_reason != "tool_calls" or not choice.message.tool_calls:
         result["final_answer"] = choice.message.content
+        result["total_latency_s"] = result["tool_wait_latency_s"]
         return result
 
     # Step 2: execute ALL tool calls (some models call multiple at once)
     messages.append(choice.message)
 
     all_tool_names = []
+    tool_outputs = []
+    tool_wait_latency_s = 0.0
+    total_cost = 0.0
     for tool_call in choice.message.tool_calls:
         tool_name = tool_call.function.name
         tool_args = json.loads(tool_call.function.arguments)
         all_tool_names.append(tool_name)
 
         tool_output = asyncio.run(execute_tool(tool_name, tool_args, wrappers))
+        wrapper = wrapper_by_name.get(tool_name, {})
+        tool_wait_latency_s += float(wrapper.get("latency_seconds", 0.0))
+        total_cost += float(wrapper.get("cost", 0.0))
 
         messages.append({
             "role": "tool",
             "tool_call_id": tool_call.id,
             "content": tool_output,
         })
+        tool_outputs.append(tool_output)
 
     # Record the first tool selected (primary choice)
     first_call = choice.message.tool_calls[0]
     result["tool_selected"] = first_call.function.name
     result["tool_args"] = json.loads(first_call.function.arguments)
     result["all_tools_called"] = all_tool_names
-    result["tool_response"] = messages[-len(choice.message.tool_calls)]["content"]
+    result["tool_response"] = tool_outputs[0] if tool_outputs else None
+    result["tool_wait_latency_s"] = tool_wait_latency_s
+    result["total_cost"] = total_cost
 
-    # Step 3: send tool results back → LLM gives final answer
-    final_response = client.chat.completions.create(
+    # Step 3: rephrase tool output into a direct answer (same style as ground truth)
+    combined_tool_output = "\n\n".join(tool_outputs) if tool_outputs else ""
+    result["final_answer"] = rephrase_as_answer(
+        client=client,
         model=model,
-        messages=messages,
+        query=query,
+        raw_data=combined_tool_output,
     )
-    result["final_answer"] = final_response.choices[0].message.content
+    result["total_latency_s"] = result["tool_wait_latency_s"]
 
     return result
+
+
+def build_ground_truth_for_query(job: dict) -> dict:
+    """Worker job for Step 1: fetch raw forecast and rephrase into ground truth."""
+    query = job["q"]
+    lat = job["lat"]
+    lon = job["lon"]
+    model = job["model"]
+    api_key = job["api_key"]
+    base_url = job["base_url"]
+
+    raw = asyncio.run(get_forecast(lat, lon))
+    client = OpenAI(api_key=api_key, base_url=base_url)
+    gt_answer = rephrase_as_answer(client, model, query, raw)
+
+    return {"q": query, "raw": raw, "gt": gt_answer}
 
 
 def main():
@@ -312,6 +346,8 @@ def main():
     print(f"Model:       {args.model}")
     print(f"Judge model: {judge_model}")
     print(f"Wrappers:    {[w['name'] for w in wrappers]}")
+    print(f"Latencies:   { {w['name']: w.get('latency_seconds', 0.0) for w in wrappers} }")
+    print(f"Costs:       { {w['name']: w.get('cost', 0.0) for w in wrappers} }")
     print(f"Queries:     {len(queries)}")
     print("=" * 70)
 
@@ -332,15 +368,26 @@ def main():
     print("\nStep 1: Fetching ground truth for all queries...")
     raw_forecasts = {}
     ground_truths = {}
-    for i, entry in enumerate(queries, 1):
-        raw = asyncio.run(get_forecast(entry["lat"], entry["lon"]))
-        raw_forecasts[entry["q"]] = raw
+    gt_jobs = [
+        {
+            "q": entry["q"],
+            "lat": entry["lat"],
+            "lon": entry["lon"],
+            "model": judge_model,
+            "api_key": api_key,
+            "base_url": base_url,
+        }
+        for entry in queries
+    ]
+    gt_workers = min(len(gt_jobs), max(1, mp.cpu_count() - 1))
+    print(f"  Using multiprocessing with {gt_workers} workers...")
 
-        gt_answer = rephrase_as_answer(client, judge_model, entry["q"], raw)
-        ground_truths[entry["q"]] = gt_answer
-
-        print(f"  [{i}/{len(queries)}] {entry['q']}")
-        print(f"    GT: {gt_answer}")
+    with mp.Pool(processes=gt_workers) as pool:
+        for i, item in enumerate(pool.imap_unordered(build_ground_truth_for_query, gt_jobs), 1):
+            raw_forecasts[item["q"]] = item["raw"]
+            ground_truths[item["q"]] = item["gt"]
+            print(f"  [{i}/{len(queries)}] {item['q']}")
+            print(f"    GT: {item['gt']}")
     print(f"\n  Got ground truth for {len(ground_truths)} queries.\n")
 
     # -----------------------------------------------------------------------
@@ -392,6 +439,9 @@ def main():
             "query": job["query"],
             "correct": judgement["correct"],
             "judge_response": judgement["judge_response"],
+            "tool_wait_latency_s": result.get("tool_wait_latency_s", 0.0),
+            "total_latency_s": result.get("total_latency_s", 0.0),
+            "cost": result.get("total_cost", 0.0),
         }
 
     num_workers = min(8, len(pretest_jobs))
@@ -407,45 +457,117 @@ def main():
             if done_count % 20 == 0 or done_count == len(pretest_jobs):
                 print(f"    {done_count}/{len(pretest_jobs)} judged")
 
-    # exit()
-
     # Aggregate per-wrapper stats
     pretest_correct: dict[str, int] = {}
     pretest_total: dict[str, int] = {}
+    pretest_tool_wait_latency_sum: dict[str, float] = {}
+    pretest_total_latency_sum: dict[str, float] = {}
+    pretest_cost_sum: dict[str, float] = {}
     for w in wrappers:
         pretest_correct[w["name"]] = 0
         pretest_total[w["name"]] = 0
+        pretest_tool_wait_latency_sum[w["name"]] = 0.0
+        pretest_total_latency_sum[w["name"]] = 0.0
+        pretest_cost_sum[w["name"]] = 0.0
     for r in pretest_results:
-        pretest_total[r["wrapper"]] += 1
+        wname = r["wrapper"]
+        pretest_total[wname] += 1
+        pretest_tool_wait_latency_sum[wname] += r["tool_wait_latency_s"]
+        pretest_total_latency_sum[wname] += r["total_latency_s"]
+        pretest_cost_sum[wname] += r["cost"]
         if r["correct"]:
-            pretest_correct[r["wrapper"]] += 1
+            pretest_correct[wname] += 1
 
     # Print pre-test summary table
-    print(f"\n{'Wrapper':<25} {'Category':<20} {'Correct':>8} {'Total':>6} {'Accuracy':>9}")
-    print("-" * 72)
+    print(
+        f"\n{'Wrapper':<25} {'Category':<20} {'Correct':>8} {'Total':>6} "
+        f"{'Accuracy':>9} {'Avg Wait(s)':>11} {'Avg Total(s)':>12} {'Avg Cost':>10}"
+    )
+    print("-" * 117)
     for w in wrappers:
         wname = w["name"]
         c = pretest_correct[wname]
         t = pretest_total[wname]
         acc = c / t if t > 0 else 0
-        print(f"{wname:<25} {w['category']:<20} {c:>8} {t:>6} {acc:>8.0%}")
+        avg_tool_wait_latency_s = pretest_tool_wait_latency_sum[wname] / t if t > 0 else 0
+        avg_total_latency_s = pretest_total_latency_sum[wname] / t if t > 0 else 0
+        avg_cost = pretest_cost_sum[wname] / t if t > 0 else 0
+        print(
+            f"{wname:<25} {w['category']:<20} {c:>8} {t:>6} {acc:>8.0%} "
+            f"{avg_tool_wait_latency_s:>11.3f} {avg_total_latency_s:>12.3f} {avg_cost:>10.4f}"
+        )
+
+    overall_pretest_total = len(pretest_results)
+    overall_avg_tool_wait = (
+        sum(r["tool_wait_latency_s"] for r in pretest_results) / overall_pretest_total
+        if overall_pretest_total > 0 else 0.0
+    )
+    overall_avg_total = (
+        sum(r["total_latency_s"] for r in pretest_results) / overall_pretest_total
+        if overall_pretest_total > 0 else 0.0
+    )
+    overall_avg_cost = (
+        sum(r["cost"] for r in pretest_results) / overall_pretest_total
+        if overall_pretest_total > 0 else 0.0
+    )
+    print(
+        f"\nPre-test latency summary: avg_wait={overall_avg_tool_wait:.3f}s, "
+        f"avg_total={overall_avg_total:.3f}s, avg_cost={overall_avg_cost:.4f}"
+    )
 
     # Save pre-test results to CSV
     pretest_csv_path = os.path.join(results_dir, f"wrapper_quality_{timestamp}_w{wrapper_tag}.csv")
     with open(pretest_csv_path, "w") as f:
-        f.write("wrapper,category,correct,total,accuracy\n")
+        f.write(
+            "wrapper,category,correct,total,accuracy,"
+            "avg_tool_wait_latency_s,avg_total_latency_s,avg_cost\n"
+        )
         for w in wrappers:
             wname = w["name"]
             c = pretest_correct[wname]
             t = pretest_total[wname]
             acc = c / t if t > 0 else 0
-            f.write(f"{wname},{w['category']},{c},{t},{acc:.4f}\n")
+            avg_tool_wait_latency_s = pretest_tool_wait_latency_sum[wname] / t if t > 0 else 0
+            avg_total_latency_s = pretest_total_latency_sum[wname] / t if t > 0 else 0
+            avg_cost = pretest_cost_sum[wname] / t if t > 0 else 0
+            f.write(
+                f"{wname},{w['category']},{c},{t},{acc:.4f},"
+                f"{avg_tool_wait_latency_s:.4f},{avg_total_latency_s:.4f},{avg_cost:.4f}\n"
+            )
     print(f"\nPre-test saved to: {pretest_csv_path}")
 
     # Save detailed pre-test results to JSON
     pretest_json_path = os.path.join(results_dir, f"wrapper_quality_{timestamp}_w{wrapper_tag}.json")
+    pretest_summary = {}
+    for w in wrappers:
+        wname = w["name"]
+        c = pretest_correct[wname]
+        t = pretest_total[wname]
+        acc = c / t if t > 0 else 0
+        avg_tool_wait_latency_s = pretest_tool_wait_latency_sum[wname] / t if t > 0 else 0
+        avg_total_latency_s = pretest_total_latency_sum[wname] / t if t > 0 else 0
+        avg_cost = pretest_cost_sum[wname] / t if t > 0 else 0
+        pretest_summary[wname] = {
+            "category": w["category"],
+            "correct": c,
+            "total": t,
+            "accuracy": acc,
+            "avg_tool_wait_latency_s": avg_tool_wait_latency_s,
+            "avg_total_latency_s": avg_total_latency_s,
+            "avg_cost": avg_cost,
+        }
     with open(pretest_json_path, "w") as f:
-        json.dump({"judge_model": judge_model, "results": pretest_results}, f, indent=2)
+        json.dump(
+            {
+                "judge_model": judge_model,
+                "summary": pretest_summary,
+                "results": pretest_results,
+            },
+            f,
+            indent=2,
+        )
+
+    exit()
 
     # -----------------------------------------------------------------------
     # Step 3: LLM tool selection experiment
@@ -538,6 +660,28 @@ def main():
         if pretest_total[w["name"]] > 0 else 0
         for w in wrappers
     }
+    pretest_latency = {
+        w["name"]: {
+            "avg_tool_wait_latency_s": (
+                pretest_tool_wait_latency_sum[w["name"]] / pretest_total[w["name"]]
+                if pretest_total[w["name"]] > 0 else 0
+            ),
+            "avg_total_latency_s": (
+                pretest_total_latency_sum[w["name"]] / pretest_total[w["name"]]
+                if pretest_total[w["name"]] > 0 else 0
+            ),
+        }
+        for w in wrappers
+    }
+    pretest_cost = {
+        w["name"]: {
+            "avg_cost": (
+                pretest_cost_sum[w["name"]] / pretest_total[w["name"]]
+                if pretest_total[w["name"]] > 0 else 0
+            ),
+        }
+        for w in wrappers
+    }
 
     with open(out_path, "w") as f:
         json.dump(
@@ -549,6 +693,8 @@ def main():
                 "num_queries": total,
                 "summary": summary,
                 "pretest_accuracy": pretest_accuracy,
+                "pretest_latency": pretest_latency,
+                "pretest_cost": pretest_cost,
                 "results": all_results,
             },
             f,
@@ -558,16 +704,19 @@ def main():
     # --- Save per-wrapper summary CSV ---
     csv_path = os.path.join(results_dir, f"summary_{timestamp}_w{wrapper_tag}.csv")
     with open(csv_path, "w") as f:
-        f.write("wrapper,selected,frequency,correct,total,accuracy\n")
+        f.write("wrapper,selected,frequency,correct,total,accuracy,avg_cost,total_cost\n")
         # Include all wrappers, even those never selected
         all_wrapper_names = [w["name"] for w in wrappers]
+        wrapper_cost_map = {w["name"]: float(w.get("cost", 0.0)) for w in wrappers}
         for name in all_wrapper_names:
             sel = selection_counts.get(name, 0)
             freq = sel / total if total > 0 else 0
             cor = wrapper_correct.get(name, 0)
             tot = wrapper_total.get(name, 0)
             acc = cor / tot if tot > 0 else 0
-            f.write(f"{name},{sel},{freq:.4f},{cor},{tot},{acc:.4f}\n")
+            avg_cost = wrapper_cost_map.get(name, 0.0)
+            total_cost = avg_cost * sel
+            f.write(f"{name},{sel},{freq:.4f},{cor},{tot},{acc:.4f},{avg_cost:.4f},{total_cost:.4f}\n")
 
     print(f"\nResults saved to: {out_path}")
     print(f"Summary CSV:      {csv_path}")

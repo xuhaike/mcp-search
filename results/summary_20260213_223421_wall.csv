@@ -1,0 +1,11 @@
+wrapper,selected,frequency,correct,total,accuracy
+nws_forecast,5,0.2500,5,5,1.0000
+weatherstack,0,0.0000,0,0,0.0000
+open_meteo,2,0.1000,2,2,1.0000
+noaa_gridpoint,2,0.1000,0,2,0.0000
+accuweather,0,0.0000,0,0,0.0000
+weather_gov,10,0.5000,0,10,0.0000
+darksky,0,0.0000,0,0,0.0000
+openweather,0,0.0000,0,0,0.0000
+weatherbit,0,0.0000,0,0,0.0000
+visual_crossing,0,0.0000,0,0,0.0000

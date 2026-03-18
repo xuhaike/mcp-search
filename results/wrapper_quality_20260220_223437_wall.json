@@ -1,0 +1,1677 @@
+{
+  "judge_model": "openai/gpt-5-nano",
+  "summary": {
+    "nws_forecast": {
+      "category": "baseline",
+      "correct": 18,
+      "total": 20,
+      "accuracy": 0.9,
+      "avg_latency_s": 22.051277346210554
+    },
+    "weatherstack": {
+      "category": "description_concise",
+      "correct": 16,
+      "total": 20,
+      "accuracy": 0.8,
+      "avg_latency_s": 18.97353085668292
+    },
+    "open_meteo": {
+      "category": "description_vague",
+      "correct": 15,
+      "total": 20,
+      "accuracy": 0.75,
+      "avg_latency_s": 21.855172815546393
+    },
+    "noaa_gridpoint": {
+      "category": "description_jargon",
+      "correct": 19,
+      "total": 20,
+      "accuracy": 0.95,
+      "avg_latency_s": 18.493585303402504
+    },
+    "accuweather": {
+      "category": "data_noisy",
+      "correct": 5,
+      "total": 20,
+      "accuracy": 0.25,
+      "avg_latency_s": 20.256849566614257
+    },
+    "weather_gov": {
+      "category": "data_broken",
+      "correct": 0,
+      "total": 20,
+      "accuracy": 0.0,
+      "avg_latency_s": 14.991158112999983
+    },
+    "darksky": {
+      "category": "data_inverted",
+      "correct": 0,
+      "total": 20,
+      "accuracy": 0.0,
+      "avg_latency_s": 19.637987524666823
+    },
+    "openweather": {
+      "category": "data_verbose",
+      "correct": 18,
+      "total": 20,
+      "accuracy": 0.9,
+      "avg_latency_s": 19.432957359869032
+    },
+    "weatherbit": {
+      "category": "data_minimal",
+      "correct": 8,
+      "total": 20,
+      "accuracy": 0.4,
+      "avg_latency_s": 17.14613205436617
+    },
+    "visual_crossing": {
+      "category": "data_wrong_location",
+      "correct": 0,
+      "total": 20,
+      "accuracy": 0.0,
+      "avg_latency_s": 20.490652549127116
+    }
+  },
+  "results": [
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature and wind exactly match the ground truth for Chicago, and the timeframe/location are consistent.",
+      "latency_s": 18.203073115088046
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll data matches ground truth: 47\u00b0F, 7 mph winds from ESE, rain and snow on Saturday in Seattle.",
+      "latency_s": 17.208010287955403
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer matches the ground truth for Minneapolis tonight: no snow, low 15\u00b0F, NW winds 5\u201310 mph, and mostly cloudy.",
+      "latency_s": 18.555896040052176
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer matches the ground truth for this afternoon and tonight, including temperatures, wind direction/speeds, and light snow.",
+      "latency_s": 18.754383590072393
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe This Afternoon and Tonight details match the ground truth; the extra Saturday forecast does not contradict the provided data and is not disallowed.",
+      "latency_s": 24.0529351872392
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How windy is it in San Francisco?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Wind speeds and directions align with ground truth for San Francisco; no discrepancies in the reported intervals or directions.",
+      "latency_s": 19.634894684888422
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe nighttime forecast adds a chance of light snow and partly cloudy, which is not present in the ground truth and contradicts the stated conditions.",
+      "latency_s": 23.446125748101622
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperatures and wind data match ground truth within \u00b13\u00b0F; sky conditions and rain chances are consistent (no contradictions), and Sunday night data omission is not incorrect.",
+      "latency_s": 22.912989736068994
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature and wind match the ground truth: 63\u00b0F and ENE around 5 mph.",
+      "latency_s": 19.96639333991334
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature and wind details exactly match the ground truth for Los Angeles.",
+      "latency_s": 23.013813241384923
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemps and wind directions/speeds match the ground truth; conditions described are consistent (mostly cloudy this afternoon, cloudy with rain likely tonight).",
+      "latency_s": 15.189882830251008
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Content matches ground truth: not sunny with showers/thunderstorms likely; high around 69\u00b0F; north wind ~5 mph.",
+      "latency_s": 24.78794869594276
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is there a storm in Houston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: No storm forecast; temperatures and winds for This Afternoon and Tonight match ground truth; extra Saturday forecast does not contradict.",
+      "latency_s": 18.328765850048512
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nMatches ground truth: high of 55\u00b0F this afternoon, winds around 6 mph from the N; no contradictory details.",
+      "latency_s": 21.2948853620328
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Forecast matches ground truth for Detroit tonight: ~33\u00b0F, 13\u201320 mph winds from WSW, slight chance of light snow, then mostly cloudy.",
+      "latency_s": 13.741634740959853
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is it raining in Washington DC?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer matches the ground truth (54\u00b0F, ~8 mph SW, Mostly Sunny) and correctly states it is not raining right now.",
+      "latency_s": 32.64424984017387
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe forecast in the answer matches the ground truth temperatures for today through Thursday within \u00b13\u00b0F and maintains the same weekend and next-week trends without contradicting conditions.",
+      "latency_s": 34.798799748998135
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Forecast details (rain and snow, 47\u00b0F, 7 mph from ESE, Saturday) match the ground truth for Seattle tomorrow.",
+      "latency_s": 17.283067528624088
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Saturday and Sunday temperatures, winds, and conditions align with the ground truth; the added Saturday Night details do not contradict the provided data.",
+      "latency_s": 24.922444471158087
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (35\u00b0F) and wind (25 mph from West) match the ground truth precisely.",
+      "latency_s": 17.441390766296536
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll temperatures (36\u00b0F, 19\u00b0F, 44\u00b0F) match ground truth within \u00b13\u00b0F, winds, precipitation, and conditions are consistent, and location/times align with Salt Lake City forecasts.",
+      "latency_s": 26.345519260969013
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: This Afternoon 42\u00b0F and Tonight 39\u00b0F with matching winds and rain probabilities for New York; extra Saturday forecast does not contradict ground truth.",
+      "latency_s": 17.06699582003057
+    },
+    {
+      "wrapper": "nws_forecast",
+      "category": "baseline",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemps cited (72\u00b0F Tue, 54\u00b0F Tue night) do not match ground truth (tonight 28\u00b0F, 80\u00b0F Wed) and are not within \u00b13\u00b0F.",
+      "latency_s": 23.222901152912527
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe forecast lines exactly align with the ground truth for both Saturday and Sunday (temps, winds, and conditions).",
+      "latency_s": 18.84062880091369
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The forecasted low (15\u00b0F), wind (NW 5-10 mph), and mostly cloudy conditions with no snow align with the ground truth.",
+      "latency_s": 16.629616862162948
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures and winds match the ground truth, but the answer adds \"a chance of light snow\" tonight and \"partly cloudy,\" which are not in the ground truth and could be misleading.",
+      "latency_s": 23.046557918190956
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "How windy is it in San Francisco?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll wind data matches ground truth for today, tonight, and Saturday (3 mph SE today, 3\u20137 mph S tonight, 7\u201316 mph SSE Saturday with ~15 mph SSE Saturday night) in San Francisco.",
+      "latency_s": 16.546734970994294
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperature (61\u00b0F) and wind (\u22485 mph from SW) match the ground truth for Los Angeles.",
+      "latency_s": 14.833306588232517
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer accurately reflects the ground truth: 38\u00b0F this afternoon with 12 mph E and light snow; 25\u00b0F tonight with NE 6\u201313 mph and light snow.",
+      "latency_s": 18.04583467077464
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature and wind match the ground truth; the added \"partly sunny\" does not contradict the reported conditions.",
+      "latency_s": 11.69931816495955
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperatures, winds, and weather conditions for this afternoon and tonight match the ground truth for Portland; no contradictions and no missing essential data.",
+      "latency_s": 13.361632118932903
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Is there a storm in Houston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperatures, winds, and rain chances match the ground truth for Houston; no storm forecast and correct location. The note about fog is an extra detail not present in the ground truth but does not contradict it.",
+      "latency_s": 22.133775029331446
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The forecast matches ground truth (not sunny; showers/thunderstorms likely; ~69\u00b0F high; winds ~5 mph from the north).",
+      "latency_s": 18.76425627199933
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature and wind align with the ground truth; no contradictions or incorrect location.",
+      "latency_s": 13.295295793097466
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe statement says overnight lows fall from 43\u00b0F tonight to 61\u00b0F Thursday night, but ground truth shows overnight temps rise to 61\u00b0F, so the trend is incorrect despite matching numeric values.",
+      "latency_s": 29.13201454700902
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All details match the ground truth for Detroit (33\u00b0F, 13\u201320 mph WSW, slight snow, mostly cloudy); temperature is exact.",
+      "latency_s": 23.028815188910812
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecasted Sunday Night temperature of 31\u00b0F does not align with the ground truth (which lists Sunday 39\u00b0F and 38\u00b0F for Monday) and is outside the \u00b13\u00b0F tolerance.",
+      "latency_s": 20.07402952807024
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nSaturday/Sunday temps and wind details align with ground truth; the extra Saturday night data does not contradict the provided forecast.",
+      "latency_s": 25.643379548098892
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll three time periods match the ground truth (temperatures within \u00b13\u00b0F, winds, and precipitation/conditions aligned).",
+      "latency_s": 20.665896217804402
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe This Afternoon and Tonight details match the ground truth for New York (42\u00b0F with NE 10\u201314 mph and light rain; 39\u00b0F with NW ~10 mph and slight rain). The extra Saturday forecast does not contradict the provided data.",
+      "latency_s": 21.012751802802086
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (35\u00b0F) and wind (25 mph from West) match the ground truth for Chicago within the allowed tolerance.",
+      "latency_s": 19.007944914046675
+    },
+    {
+      "wrapper": "weatherstack",
+      "category": "description_concise",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer claims tonight is 50\u00b0F (and today 50\u00b0F) which contradicts the ground truth of 28\u00b0F tonight; wind details also differ (direction and range) from the ground truth.",
+      "latency_s": 21.93807079922408
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll data match ground truth for Seattle tomorrow: rain and snow, 47\u00b0F, winds ~7 mph from ESE.",
+      "latency_s": 25.379379865247756
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Is it cold in Denver today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The temperatures and winds match the ground truth (32\u00b0F with 10 mph N and likely light snow; 17\u00b0F with 3\u20138 mph W) for Denver, with no contradictions to the described conditions.",
+      "latency_s": 16.986017974093556
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All reported values (temperatures, winds, and conditions) align with ground truth for Saturday and Sunday.",
+      "latency_s": 26.951824407093227
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperature (61\u00b0F) matches the ground truth and wind description (5 mph from SW) aligns.",
+      "latency_s": 17.19632225809619
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All forecast elements (no snow, low 15\u00b0F, NW 5\u201310 mph, mostly cloudy) match the ground truth.",
+      "latency_s": 22.96647568885237
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer correctly mirrors the afternoon and tonight and Saturday data, but adds Sunday and Monday forecasts not present in the ground truth, making the overall answer not factually correct per the provided data.",
+      "latency_s": 34.11628436297178
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Is there a storm in Houston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nMatches no storm forecast; This Afternoon and Tonight temperatures align with ground truth; additional Saturday detail does not contradict.",
+      "latency_s": 21.267936733085662
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Today's wind direction should be SE (3 mph) per ground truth, but the answer gives S; and Sunday data is not present in the ground truth.",
+      "latency_s": 27.30799664091319
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe answer correctly states it won't be sunny (showers/thunderstorms) with a high near 69\u00b0F and north winds ~5 mph, matching the ground truth for Atlanta tomorrow.",
+      "latency_s": 16.80040093092248
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature and wind match the ground truth for Dallas (63\u00b0F, 5 mph ENE); location is correct, and the extra \"partly sunny\" description does not contradict the provided data.",
+      "latency_s": 13.80612070998177
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All reported values (temps, winds, and conditions) match the ground truth for Portland; no data is unavailable or mislocated.",
+      "latency_s": 24.300445654895157
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer incorrectly states rain begins Saturday Night, while the ground truth indicates rain starts Sunday Night (temperatures align, but precipitation timing is wrong).",
+      "latency_s": 21.86328392382711
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature details match, but the forecasted conditions say mostly sunny to partly cloudy, which contradicts the ground truth\u2019s sunny to mostly sunny.",
+      "latency_s": 31.717348434962332
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature and wind match the ground truth; no contradictory weather details.",
+      "latency_s": 18.29221283411607
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe forecast matches ground truth: 33\u00b0F, 13\u201320 mph winds from WSW, slight chance of light snow, and mostly cloudy.",
+      "latency_s": 17.663035328965634
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll reported values (temperatures, winds, and conditions) match the ground truth within the allowed tolerance; only minor wording differences.",
+      "latency_s": 15.212440575938672
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature data mismatch: ground truth says tonight ~28\u00b0F, but answer lists today ~50\u00b0F (off by ~22\u00b0F, beyond \u00b13\u00b0F).",
+      "latency_s": 19.46875086100772
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperature (35\u00b0F) and wind (25 mph from the West) match the ground truth; location and timeframe align.",
+      "latency_s": 13.737712727393955
+    },
+    {
+      "wrapper": "open_meteo",
+      "category": "description_vague",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Saturday and Sunday forecasts (56\u00b0F with 5\u201310 mph NNE and partly sunny then slight chance of rain; Sunday 42\u00b0F with NW 10\u201315 mph and sunny) match the ground truth; the additional Saturday night details are supplementary and do not contradict the provided data.",
+      "latency_s": 25.78648240910843
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The temperatures, winds, and precipitation described for New York match the ground truth (42\u00b0F NE 10\u201314 mph with light rain this afternoon; 39\u00b0F NW ~10 mph with a slight chance of light rain tonight).",
+      "latency_s": 21.693958257790655
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe forecast matches the ground truth: rain and snow, 47\u00b0F, 7 mph from ESE for Seattle tomorrow.",
+      "latency_s": 20.91150968708098
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll reported temperatures, wind directions/speeds, and precipitation match the ground truth for Boston.",
+      "latency_s": 20.21870302502066
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll forecast values (temps, winds, and sky/precipitation conditions) match the Miami weekend ground truth within \u00b13\u00b0F.",
+      "latency_s": 27.415127000771463
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer matches the ground truth: 15\u00b0F tonight, NW winds 5\u201310 mph, mostly cloudy, and no snowfall forecast for Minneapolis.",
+      "latency_s": 17.041374618187547
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Is it cold in Denver today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Afternoon 32\u00b0F with 10 mph north wind and light snow; tonight 17\u00b0F with 3\u20138 mph west wind all align with ground truth. The extra note about possible light snow and partly cloudy does not contradict the provided data.",
+      "latency_s": 16.074625343084335
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer is empty; it should state no storm is forecast for Houston and include the forecast temps (81\u00b0F this afternoon, 64\u00b0F tonight) and wind details.",
+      "latency_s": 1.8538970509544015
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "How windy is it in San Francisco?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll listed wind speeds and directions (today, tonight, Saturday) match the ground truth; the extra Sunday data does not contradict the provided information.",
+      "latency_s": 12.767549687996507
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The 61\u00b0F temperature and 5 mph SW wind for Los Angeles' afternoon match the ground truth; the additional tonight data does not contradict the stated value.",
+      "latency_s": 19.682253160048276
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: It accurately states tomorrow is not sunny, with showers/thunderstorms, a high near 69\u00b0F, and north winds around 5 mph, matching the ground truth for Atlanta.",
+      "latency_s": 18.64864698983729
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer reports 63\u00b0F and ENE winds ~5 mph in Dallas, matching the ground truth.",
+      "latency_s": 18.99841859471053
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (55\u00b0F) and wind speed/direction (6 mph from N) match the ground truth for Las Vegas; no contradictions.",
+      "latency_s": 20.34433186566457
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature and all weather details (winds, precipitation chance, and cloud cover) align with the ground truth.",
+      "latency_s": 14.706492332275957
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All temperatures match ground truth within \u00b13\u00b0F and wind/precipitation descriptions are consistent (SSE, E; mostly cloudy, rain likelihood).",
+      "latency_s": 18.22451075166464
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The forecast aligns with the ground truth (63\u00b0F today with 5 mph WSW and sunny; 43\u00b0F tonight with 0\u20135 mph NE and mostly clear; Saturday 72\u00b0F rising to 90\u00b0F Thursday with generally light winds), with no contradictory details.",
+      "latency_s": 26.780449436977506
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Is it raining in Washington DC?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe answer matches the ground truth: 54\u00b0F this afternoon with mostly sunny conditions and SW ~8 mph, no rain now, and rain/Snow forecast to arrive Sunday Night.",
+      "latency_s": 20.470056040212512
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All three time blocks match the ground truth for Salt Lake City in temperature, wind, and conditions.",
+      "latency_s": 18.156200968194753
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature difference is within \u00b13\u00b0F (36\u00b0F vs 35\u00b0F); wind matches (25 mph W); no contradiction with conditions.",
+      "latency_s": 12.36917234165594
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: This Afternoon temperature (33\u00b0F) is 9\u00b0F off from ground truth (42\u00b0F); temps are outside \u00b13\u00b0F tolerance, though wind and precipitation align and location is correct.",
+      "latency_s": 20.522347640246153
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature (54\u00b0F) differs from ground truth (47\u00b0F) by 7\u00b0F, which is outside the \u00b13\u00b0F tolerance; precipitation and wind match, location is Seattle.",
+      "latency_s": 18.559618653729558
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Daytime temps and winds for Saturday and Sunday match the ground truth; Saturday night details are additional but do not contradict the provided forecast.",
+      "latency_s": 21.886041088961065
+    },
+    {
+      "wrapper": "noaa_gridpoint",
+      "category": "description_jargon",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: No severe weather is indicated and the reported temperature range (about 27\u00b0F to 80\u00b0F) is within 3\u00b0F of the ground truth range (28\u00b0F to 80\u00b0F); wind and conditions are plausible and non-contradictory.",
+      "latency_s": 20.25984744122252
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Tonight's temperature (24\u00b0F) is 7\u00b0F off from the ground truth (17\u00b0F), exceeding the \u00b13\u00b0F accuracy requirement.",
+      "latency_s": 14.413984023965895
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: All listed temperatures are outside the \u00b13\u00b0F tolerance of the ground truth (e.g., Saturday 89\u00b0F vs 79\u00b0F), so the forecast is not correctly aligned.",
+      "latency_s": 23.610571925062686
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature forecast (22\u00b0F) differs from ground truth (15\u00b0F) by 7\u00b0F, exceeding the \u00b13\u00b0F tolerance; other details (wind, clouds, and no snow tonight) are correct.",
+      "latency_s": 15.171299211215228
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe reported this-afternoon temperature (64\u00b0F) is within \u00b13\u00b0F of the ground truth (61\u00b0F) for Los Angeles; location is correct and no conflicting weather details are given.",
+      "latency_s": 18.37671615695581
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Tonight's temperature (17\u00b0F) differs from ground truth (25\u00b0F) by 8\u00b0F, exceeding the \u00b13\u00b0F tolerance.",
+      "latency_s": 24.090719796717167
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe current wind direction is SE per ground truth, but the answer says S, which contradicts the data.",
+      "latency_s": 18.514167569112033
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nTemperature is within 2\u00b0F of ground truth and wind (5 mph ENE) matches.",
+      "latency_s": 14.33861848898232
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemperature forecast (78\u00b0F) deviates from ground truth (69\u00b0F) by 9\u00b0F, exceeding the \u00b13\u00b0F tolerance; condition (not sunny) matches but the temperature is incorrect.",
+      "latency_s": 18.149991810321808
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Tonight's temperature (74\u00b0F) is 10\u00b0F off from the ground truth (64\u00b0F), exceeding \u00b13\u00b0F; additionally, the Saturday forecast is not in the ground truth.",
+      "latency_s": 30.52831916930154
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Tonight's low is listed as 38\u00b0F, which is 5\u00b0F different from the ground truth 43\u00b0F, exceeding the \u00b13\u00b0F tolerance.",
+      "latency_s": 25.498942674137652
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe reported low (28\u00b0F) is 5\u00b0F off the ground truth (33\u00b0F), exceeding the \u00b13\u00b0F tolerance; wind and sky conditions match.",
+      "latency_s": 11.564949559047818
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Night and Saturday temperatures exceed the \u00b13\u00b0F tolerance (41 vs 37\u00b0F and 36 vs 46\u00b0F), making the forecast incorrect despite having matching wind/conditions.",
+      "latency_s": 21.04810657305643
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe high 54\u00b0F is within 1\u00b0F of the ground truth 55\u00b0F, and wind direction/speed (N at ~6 mph) match; conditions are not contradicted.",
+      "latency_s": 19.009458757005632
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Afternoon temperature (50\u00b0F) deviates from ground truth (54\u00b0F) by 4\u00b0F, beyond the \u00b13\u00b0F limit; also rain start day is stated as Saturday night instead of Sunday night.",
+      "latency_s": 23.74840222671628
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemperatures exceed \u00b13\u00b0F of the ground truth (52\u00b0F vs 56\u00b0F Saturday; 50\u00b0F vs 42\u00b0F Sunday), so the forecast is not factually correct.",
+      "latency_s": 17.88923396030441
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims data is unavailable, but ground truth provides specific weather details for New York.",
+      "latency_s": 11.944137908983976
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth indicates rain in Seattle tomorrow with 47\u00b0F and 7 mph winds; the answer claims a service outage and provides no forecast, which is incorrect.",
+      "latency_s": 13.672900507226586
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims data is unavailable, but ground truth gives 35\u00b0F in Chicago (\u00b13\u00b0F tolerance) and wind details; the answer should report the temperature and wind, not say unavailable.",
+      "latency_s": 14.258550509344786
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims the forecast is unavailable, but the ground truth provides a Miami weekend forecast.",
+      "latency_s": 15.801997173577547
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemperatures are not within \u00b13\u00b0F of the ground truth (ground truth: 28\u00b0F tonight, 80\u00b0F Wednesday; answer: 21\u00b0F tonight, 76\u00b0F Tuesday), and the timing (Wednesday vs Tuesday) mismatches.",
+      "latency_s": 21.433309654705226
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims data is unavailable, but ground truth provides Denver temperatures (32\u00b0F today afternoon, 17\u00b0F tonight) and wind/snow conditions.",
+      "latency_s": 12.718838727101684
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The ground truth has Boston weather data; the answer claims service unavailability, which is not correct.",
+      "latency_s": 17.147930428385735
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nIt claims data is unavailable, contradicting the ground truth which specifies no snow tonight and provides Minneapolis temperature and wind details.",
+      "latency_s": 13.015297951642424
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims data is unavailable, but ground truth provides specific wind speeds for San Francisco, so it fails to report accurate wind information.",
+      "latency_s": 15.151918437797576
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims the forecast service is unavailable, but ground truth provides a Houston forecast with no storm and with temperatures; thus the answer is not correct.",
+      "latency_s": 14.922260001301765
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nGround truth shows 61\u00b0F in Los Angeles; the answer claims data is unavailable, which is incorrect per the ground truth.",
+      "latency_s": 18.58748906524852
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claimed data unavailable, but ground truth provides a Phoenix forecast for the week.",
+      "latency_s": 13.753634050954133
+    },
+    {
+      "wrapper": "accuweather",
+      "category": "data_noisy",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The answer's temps for This Afternoon, Tonight, and Saturday are within \u00b13\u00b0F of the ground truth and the wind/conditions match; extra entries (Saturday Night/Sunday) do not contradict the provided data.",
+      "latency_s": 36.299061140045524
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "How hot is it in Dallas right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe response did not provide the current temperature (63\u00b0F within \u00b13\u00b0F) and instead claimed the service was unavailable.",
+      "latency_s": 19.705942615401
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer says the forecast is unavailable and provides no temps or conditions; ground truth predicts showers/thunderstorms in Atlanta with a high around 69\u00b0F and northerly winds.",
+      "latency_s": 15.380615428090096
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The ground truth provides specific Portland temperatures and conditions; the answer incorrectly claims the data is unavailable.",
+      "latency_s": 17.395137208048254
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer does not report the expected low (33\u00b0F) or wind/conditions and incorrectly claims the forecast is unavailable.",
+      "latency_s": 12.402905713301152
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth shows Las Vegas high of 55\u00b0F today; answer falsely claimed data unavailable.",
+      "latency_s": 14.432070177048445
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth indicates no rain this afternoon with 54\u00b0F and mostly sunny conditions; the answer incorrectly claims data is unavailable.",
+      "latency_s": 12.74064275296405
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims the forecast is unavailable and provides no temperatures or wind data, whereas ground truth has specific Nashville weekend temps and winds.",
+      "latency_s": 16.116819721180946
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe ground truth indicates no severe weather and provides a forecast; the answer falsely claims data is unavailable.",
+      "latency_s": 13.273038162384182
+    },
+    {
+      "wrapper": "weather_gov",
+      "category": "data_broken",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer provides no Salt Lake City forecast and claims a service outage, which contradicts the ground truth data.",
+      "latency_s": 17.401035720016807
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures are off by ~16\u00b0F for this afternoon (42\u00b0F ground truth vs 58\u00b0F reported), violating the \u00b13\u00b0F accuracy; also includes an extra day not in the ground truth.",
+      "latency_s": 19.32071110792458
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe temperature (65\u00b0F) is about 30\u00b0F off from the ground truth (35\u00b0F); wind direction matches but overall data is wrong.",
+      "latency_s": 15.829463984351605
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature differs by 6\u00b0F (53\u00b0F vs 47\u00b0F), exceeding the \u00b13\u00b0F tolerance; rain/snow and wind direction match.",
+      "latency_s": 23.0561679340899
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe temperatures are drastically wrong (ground truth highs around 79\u201384\u00b0F and lows 53\u201367\u00b0F); the forecasted values (21\u00b0F, 33\u00b0F, 16\u00b0F) do not match Miami weekend weather.",
+      "latency_s": 21.099961064755917
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It reports warm temperatures (68\u00b0F/83\u00b0F) far from the ground-truth cold values (32\u00b0F/17\u00b0F) for Denver today, and misstates wind/snow details.",
+      "latency_s": 22.475445786025375
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature 85\u00b0F vs ground truth 15\u00b0F (difference 70\u00b0F), outside \u00b13\u00b0F; wind and sky conditions match, but the temperature is incorrect.",
+      "latency_s": 15.684439583215863
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures are far from the ground truth (e.g., 62\u00b0F vs 38\u00b0F, 75\u00b0F vs 25\u00b0F, 71\u00b0F vs 29\u00b0F); overall forecast incorrect despite some matching wind directions.",
+      "latency_s": 20.79514021007344
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe reported afternoon temperature (39\u00b0F) contradicts the ground truth (61\u00b0F); also includes a forecast for tonight not present in the ground truth.",
+      "latency_s": 17.300680516753346
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures are far from ground truth (This Afternoon 19\u00b0F vs 81\u00b0F; Tonight 36\u00b0F vs 64\u00b0F); the forecast mentions rain showers consistent with ground truth but the temperature values violate the \u00b13\u00b0F requirement.",
+      "latency_s": 18.754581911023706
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth states today\u2019s wind is about 3 mph from SE, but the answer lists 3 mph from S, which is a contradicting wind direction.",
+      "latency_s": 19.944032647646964
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "How hot is it in Dallas right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature is far off (37\u00b0F vs 63\u00b0F); wind direction matches but temperature does not meet the \u00b13\u00b0F tolerance.",
+      "latency_s": 13.829326110891998
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe temperature is incorrect (67\u00b0F vs 33\u00b0F), though wind, precipitation, and conditions match.",
+      "latency_s": 10.84188927989453
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe temperatures are not within \u00b13\u00b0F of the ground truth (54\u00b0F vs 46\u00b0F this afternoon; 63\u00b0F vs 37\u00b0F tonight), though wind and cloud/rain descriptions largely match.",
+      "latency_s": 20.081633260007948
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature forecast (31\u00b0F) is far from the ground-truth high (69\u00b0F); wind and precipitation align but the temperature is incorrect by ~38\u00b0F.",
+      "latency_s": 21.218395285774022
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe temperatures and weekly outlook are far from the ground truth (Today 63\u00b0F/43\u00b0F vs 37\u00b0F/57\u00b0F; weekly highs 72\u201390\u00b0F vs 28\u201310\u00b0F), and do not match the described conditions.",
+      "latency_s": 33.48785264696926
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The afternoon temperature is off by 8\u00b0F (46\u00b0F vs 54\u00b0F expected), and the forecasted rain timing is incorrect (rain starts Sunday night per ground truth, not Saturday night).",
+      "latency_s": 21.06401902390644
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe reported high (65\u00b0F) and this afternoon temperature (45\u00b0F) are about 10\u00b0F off from the ground truth 55\u00b0F, and the timing (tonight vs this afternoon) is inconsistent.",
+      "latency_s": 20.309122788719833
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The temperatures provided (e.g., Tonight 72\u00b0F) are not within \u00b13\u00b0F of the ground truth (Tonight ~28\u00b0F), so the forecast is inaccurate.",
+      "latency_s": 19.879942566156387
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemps for Saturday and Sunday are far from the ground truth (Sat 44\u00b0F vs 56\u00b0F; Sun 58\u00b0F vs 42\u00b0F), exceeding \u00b13\u00b0F tolerance.",
+      "latency_s": 21.49339333223179
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the weather in New York?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nForecast matches ground truth for New York; temperatures and wind/precipitation descriptions align.",
+      "latency_s": 14.555917765945196
+    },
+    {
+      "wrapper": "darksky",
+      "category": "data_inverted",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature forecasts are way off (e.g., This Afternoon 64\u00b0F vs 36\u00b0F; Tonight 81\u00b0F vs 19\u00b0F; Saturday 56\u00b0F vs 44\u00b0F), exceeding the \u00b13\u00b0F tolerance.",
+      "latency_s": 16.293551452923566
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe reported temperature (35\u00b0F) and winds (25 mph from the West) match the ground truth for Chicago.",
+      "latency_s": 17.890125166159123
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nForecast matches ground truth: rain and snow, 47\u00b0F, 7 mph from ESE for Seattle tomorrow; no contradictions.",
+      "latency_s": 22.805427208077163
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Is it cold in Denver today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll reported values (32\u00b0F, 10 mph north wind with light snow; 17\u00b0F, 3\u20138 mph west) match the ground truth for Denver.",
+      "latency_s": 15.882960117887706
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll reported values align with the ground truth within \u00b13\u00b0F and match wind/condition details; Sunday night data is omitted but not contradicted.",
+      "latency_s": 20.664215825963765
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The temperatures, winds, and precipitation for this afternoon and tonight match the ground truth; no contradictions and location is correct.",
+      "latency_s": 15.776258322875947
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe answer accurately reflects the ground truth: no snow forecast, low 15\u00b0F, NW winds 5\u201310 mph, mostly cloudy skies.",
+      "latency_s": 16.675841664895415
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperature (61\u00b0F) and wind (5 mph SW) match the ground truth for Los Angeles today; phrasing is slightly different but consistent.",
+      "latency_s": 11.48374005407095
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperature (63\u00b0F) and wind (5 mph ENE) match the ground truth.",
+      "latency_s": 13.267559346277267
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Today\u2019s wind direction is SE in the ground truth, but the answer says winds from the south; speeds align but direction does not.",
+      "latency_s": 18.17863209126517
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Is there a storm in Houston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperatures (81\u00b0F today, 64\u00b0F tonight) and winds (SE 5 mph, S 0\u20135 mph) match the ground truth, and precipitation chances align; the additional mention of fog is not contradicted by the data.",
+      "latency_s": 18.234859955962747
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nMatches ground truth: not sunny with showers/thunderstorms likely, high around 69\u00b0F, winds ~5 mph from the north for Atlanta.",
+      "latency_s": 19.995635045226663
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature and wind match the ground truth (55\u00b0F, winds from the north); location is correct and no conflicting condition details are given.",
+      "latency_s": 17.064083292149007
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What are the weather conditions in Portland?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperatures, winds, and conditions for Portland (afternoon, tonight, and Saturday) align with the ground truth.",
+      "latency_s": 19.76193034555763
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nAll reported values (33\u00b0F, 13\u201320 mph from WSW, slight snow, mostly cloudy) match the ground truth.",
+      "latency_s": 18.152679207734764
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The temps and current conditions match, but the answer adds a Thursday rain forecast not indicated in the ground truth (ground truth only mentions rain starting Sunday night into Sunday/Monday).",
+      "latency_s": 20.025522609706968
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer cites 43\u00b0F (4\u00b0F off from 47\u00b0F allowed) and claims no precipitation, but ground truth indicates rain (and snow) with 47\u00b0F.",
+      "latency_s": 13.130998596083373
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Highs and the nightly temperature progression align with the ground truth for Phoenix, and conditions (sunny and light winds) are consistent; no data is contradicted.",
+      "latency_s": 35.69370986381546
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The daytime Saturday (56\u00b0F, 5\u201310 mph NNE, partly sunny then slight rain) and Sunday (42\u00b0F, NW 10\u201315 mph, sunny) match the ground truth; added nighttime details do not contradict the given data.",
+      "latency_s": 25.5806129979901
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe ground truth includes wind and precipitation details (NE 10\u201314 mph with rain, and NW ~10 mph with light rain); stating no wind data is provided makes the answer incomplete and incorrect.",
+      "latency_s": 17.393730410840362
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe temperatures and wind/conditions match the ground truth (within \u00b13\u00b0F; no contradictions).",
+      "latency_s": 25.35295681003481
+    },
+    {
+      "wrapper": "openweather",
+      "category": "data_verbose",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: No severe weather; winds and temps align with ground truth (tonight 28\u00b0F, up to 80\u00b0F Wednesday; winds 6\u20139 mph NE tonight and 14\u201320 mph SSW Tuesday). The \"this afternoon 50\u00b0F\" is plausible and does not contradict. Location is correct.",
+      "latency_s": 21.61647950578481
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe reported temperature (35\u00b0F) matches the ground truth; no conflicting wind or conditions are stated.",
+      "latency_s": 19.735134528018534
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe 79\u00b0F temperature matches the Saturday high in the ground truth and does not conflict with any wind or precipitation details.",
+      "latency_s": 16.6666711140424
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Is it cold in Denver today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe reported 32\u00b0F matches the ground truth for Denver's temperature this afternoon, and there is no contradictory information about wind or precipitation.",
+      "latency_s": 18.096709777135402
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth lists a low of 15\u00b0F (NW winds 5\u201310 mph, mostly cloudy, no snow). The answer cites 30\u00b0F, which is off by more than 3\u00b0F, violating the temperature accuracy rule. It correctly notes no snowfall but the temperature data is incorrect.",
+      "latency_s": 13.278971374966204
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe ground truth provides wind speeds (light ~3 mph today, 3\u20137 mph tonight, 7\u201316 mph Saturday); the answer incorrectly claims only a temperature (54\u00b0F) and no wind data.",
+      "latency_s": 13.158415222074836
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the weather like in Boston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe answer correctly cites 38\u00b0F for Boston (matching the ground truth for this afternoon within \u00b13\u00b0F) and does not conflict with wind or precipitation details, though it omits other forecast elements.",
+      "latency_s": 20.343588326126337
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe reported temperature (61\u00b0F) matches the ground truth for Los Angeles; no conflicting details and no wrong location.",
+      "latency_s": 22.904635773971677
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Is there a storm in Houston?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Ground truth shows no storm in Houston and 81\u00b0F this afternoon; the answer states no storm and includes the 81\u00b0F temperature, which is within \u00b13\u00b0F.",
+      "latency_s": 18.09964192425832
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "How hot is it in Dallas right now?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The reported temperature (63\u00b0F) matches the ground truth for Dallas; location is correct and no conflicting wind/conditions are stated.",
+      "latency_s": 20.185443407855928
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecasted high (75\u00b0F) is about 6\u00b0F off from the ground truth (69\u00b0F), exceeding the \u00b13\u00b0F tolerance, and it omits the expected precipitation/cloudy conditions.",
+      "latency_s": 16.176111773122102
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The ground truth includes wind and weather conditions (SSE 6 mph and mostly cloudy, tonight rain, etc.); claiming there are no wind/precip/conditions is inaccurate.",
+      "latency_s": 13.531589969061315
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims wind data isn\u2019t provided, but ground truth includes wind details (e.g., 5 mph WSW today), so it contradicts wind information.",
+      "latency_s": 26.675158862024546
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The forecasted temperature (46\u00b0F) is about 13\u00b0F higher than the ground truth low (33\u00b0F), which is outside the \u00b13\u00b0F tolerance; also does not match the stated conditions.",
+      "latency_s": 15.58021131111309
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nGround truth shows no rain this afternoon (Mostly Sunny, 54\u00b0F); the answer incorrectly states precipitation is undeterminable.",
+      "latency_s": 11.856585598085076
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nThe high temp reported (55\u00b0F) matches the ground truth; no conflicting weather details.",
+      "latency_s": 20.990301472134888
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe reported 65\u00b0F does not match the ground-truth weekend temperatures (56\u00b0F Saturday, 42\u00b0F Sunday), and wind/precipitation details are missing.",
+      "latency_s": 16.829079961869866
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer cites 50\u00b0F, which is not within \u00b13\u00b0F of the ground-truth forecast (28\u00b0F tonight to 80\u00b0F Wednesday); the temperature detail is inaccurate.",
+      "latency_s": 12.156574480235577
+    },
+    {
+      "wrapper": "weatherbit",
+      "category": "data_minimal",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The 36\u00b0F This Afternoon matches, but the ground truth includes 7 mph NW wind (and additional times); the answer incorrectly says no wind or other details are provided.",
+      "latency_s": 16.133087204303592
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth shows rain tomorrow in Seattle (47\u00b0F, 7 mph ESE); the answer discusses today and says there is no forecast for tomorrow, which is incorrect.",
+      "latency_s": 21.388220482040197
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer targets coordinates far from Boston and reports temperatures (82\u00b0F/71\u00b0F) far outside \u00b13\u00b0F of the Boston ground truth; winds and conditions also do not match Boston.",
+      "latency_s": 19.27384863467887
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer references a different location (Honolulu) with temperatures (82\u00b0F/71\u00b0F) far from the ground truth for New York (42\u00b0F/39\u00b0F) and contradicts wind/conditions.",
+      "latency_s": 28.360404710285366
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe ground truth reports 35\u00b0F in Chicago with W winds; the answer cites 82\u00b0F at coordinates far from Chicago, which is incorrect for the location and temperature.",
+      "latency_s": 18.656781647820026
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast is for coordinates near Honolulu, not Miami, and it does not provide the weekend Miami forecast as requested.",
+      "latency_s": 21.056882250588387
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It attributes weather to a different location (not Denver) and reports temperatures (82\u00b0F/71\u00b0F) that do not match the ground truth for Denver (32\u00b0F today, 17\u00b0F tonight).",
+      "latency_s": 21.330408210400492
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecasted temperature (71\u00b0F) is far from the ground-truth low (15\u00b0F); wind direction (east vs NW) and sky condition (mostly clear vs mostly cloudy) also conflict.",
+      "latency_s": 15.303319628816098
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nBecause the forecast targets Honolulu coordinates (21.3069, -157.8583) rather than San Francisco, and wind speeds (12 mph today, 8 mph tonight) do not match the ground truth (3 mph SE today; 3\u20137 mph S tonight).",
+      "latency_s": 17.320458808913827
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How hot is it in Dallas right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature (82\u00b0F) differs from ground truth (63\u00b0F) by 19\u00b0F, beyond the \u00b13\u00b0F tolerance; wind also differs.",
+      "latency_s": 19.20863625407219
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures far exceed tolerance (82\u00b0F vs 46\u00b0F today; 71\u00b0F vs 37\u00b0F tonight), conditions misstate cloudiness and precipitation, and Saturday forecast is missing.",
+      "latency_s": 19.32232425827533
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer cites a different location (coordinates 21.3069, -157.8583) and a temperature of 82\u00b0F, far from LA's ground-truth 61\u00b0F; it also mismatches wind direction/speed.",
+      "latency_s": 24.74749209266156
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast is for coordinates 21.3069, -157.8583 (Waikiki, Hawaii) not Phoenix, and the temperatures/conditions do not match the ground truth.",
+      "latency_s": 20.18493823427707
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer references Honolulu data (wrong location) and provides no forecast for Atlanta, contradicting the ground truth about Atlanta\u2019s conditions tomorrow.",
+      "latency_s": 19.469127259217203
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It omits rain chances (ground truth shows afternoon and tonight rain showers) and gives tonight\u2019s temperature 71\u00b0F (7\u00b0F off from 64\u00b0F) with incorrect wind and conditions; also it claims the data isn\u2019t for Houston, which conflicts with the provided forecast.",
+      "latency_s": 18.19338383479044
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature (82\u00b0F vs 55\u00b0F) is off by 27\u00b0F beyond \u00b13\u00b0F; wind direction/speed and cloudiness also do not match the ground truth.",
+      "latency_s": 21.831068611238152
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature and conditions are incorrect (71\u00b0F vs ~33\u00b0F with WSW 13\u201320 mph and mostly cloudy); wind/precipitation do not match ground truth.",
+      "latency_s": 16.883684953674674
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer uses coordinates for a different location (not Washington DC), and temperatures (82\u00b0F/71\u00b0F) are far outside the ground-truth DC values (54\u00b0F/40\u00b0F), violating the \u00b13\u00b0F requirement.",
+      "latency_s": 22.22382386866957
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast is for coordinates 21.3069, -157.8583 (not Oklahoma City), so it does not answer the query for Oklahoma City.",
+      "latency_s": 18.50939730508253
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It ignores the provided Nashville weekend forecast and instead gives unrelated current conditions, not matching the ground truth.",
+      "latency_s": 24.589484290219843
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The forecast given is for coordinates 21.3069, -157.8583 (Honolulu), not Salt Lake City, and the temperatures (80s/70s) are far from the ground-truth Salt Lake City forecast (30s-40s).",
+      "latency_s": 21.959365646820515
+    }
+  ]
+}

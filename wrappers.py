@@ -8,9 +8,12 @@ Each wrapper is a dict with:
   - name:        tool name the LLM sees
   - description: tool description the LLM sees
   - transform:   async (raw_nws_text) -> modified_text
+  - latency_seconds: artificial latency before returning tool output
+  - cost: synthetic per-call cost for this server/wrapper
   - category:    what dimension this wrapper tests
 """
 
+import asyncio
 import json
 import random
 import re
@@ -101,6 +104,8 @@ WRAPPERS = [
             "Data sourced from the National Weather Service."
         ),
         "transform": passthrough,
+        "latency_seconds": 0.05,
+        "cost": 0.0040,
         "category": "baseline",
     },
     # --- 2. Accurate, concise description ---
@@ -109,6 +114,8 @@ WRAPPERS = [
         "name": "weatherstack",
         "description": "Get weather forecast for a US lat/lon location.",
         "transform": passthrough,
+        "latency_seconds": 0.10,
+        "cost": 0.0030,
         "category": "description_concise",
     },
     # --- 3. Accurate, vague description ---
@@ -117,6 +124,8 @@ WRAPPERS = [
         "name": "open_meteo",
         "description": "Gets weather stuff.",
         "transform": passthrough,
+        "latency_seconds": 0.15,
+        "cost": 0.0020,
         "category": "description_vague",
     },
     # --- 4. Accurate, overly technical jargon ---
@@ -132,6 +141,8 @@ WRAPPERS = [
             "extraction."
         ),
         "transform": passthrough,
+        "latency_seconds": 0.20,
+        "cost": 0.0010,
         "category": "description_jargon",
     },
     # --- 5. Noisy data (±10°F), looks legit ---
@@ -143,6 +154,8 @@ WRAPPERS = [
             "Returns current and upcoming temperature, wind, and conditions."
         ),
         "transform": add_noise,
+        "latency_seconds": 0.05,
+        "cost": 0.0004,
         "category": "data_noisy",
     },
     # --- 6. Always returns error, looks legit ---
@@ -155,6 +168,8 @@ WRAPPERS = [
             "and precipitation forecasts."
         ),
         "transform": always_error,
+        "latency_seconds": 0.06,
+        "cost": 0.0003,
         "category": "data_broken",
     },
     # --- 7. Inverted temps (100-temp), looks legit ---
@@ -167,6 +182,8 @@ WRAPPERS = [
             "multi-period forecasts with temperature and wind data."
         ),
         "transform": invert_temps,
+        "latency_seconds": 0.07,
+        "cost": 0.0004,
         "category": "data_inverted",
     },
     # --- 8. Verbose/cluttered output, looks legit ---
@@ -179,6 +196,8 @@ WRAPPERS = [
             "and weather conditions."
         ),
         "transform": make_verbose,
+        "latency_seconds": 0.08,
+        "cost": 0.0005,
         "category": "data_verbose",
     },
     # --- 9. Returns only one temperature, looks legit ---
@@ -191,6 +210,8 @@ WRAPPERS = [
             "and conditions data."
         ),
         "transform": make_minimal,
+        "latency_seconds": 0.05,
+        "cost": 0.0003,
         "category": "data_minimal",
     },
     # --- 10. Ignores input, returns wrong location, looks legit ---
@@ -203,6 +224,8 @@ WRAPPERS = [
             "temperature, wind, and conditions."
         ),
         "transform": wrong_location,
+        "latency_seconds": 0.06,
+        "cost": 0.0002,
         "category": "data_wrong_location",
     },
 ]
@@ -213,6 +236,14 @@ def get_wrappers(ids: list[int] | None = None) -> list[dict]:
     if ids is None:
         return WRAPPERS
     return [w for w in WRAPPERS if w["id"] in ids]
+
+
+async def apply_wrapper(wrapper: dict, raw_text: str) -> str:
+    """Apply wrapper latency and transform before returning tool output."""
+    latency_seconds = float(wrapper.get("latency_seconds", 0.0))
+    if latency_seconds > 0:
+        await asyncio.sleep(latency_seconds)
+    return await wrapper["transform"](raw_text)
 
 
 # Parameters schema shared by all wrappers (same interface)

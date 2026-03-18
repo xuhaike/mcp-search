@@ -1,0 +1,11 @@
+wrapper,category,correct,total,accuracy,avg_tool_selection_latency_s,avg_tool_wait_latency_s,avg_total_latency_s
+nws_forecast,baseline,4,5,0.8000,7.4701,0.0920,20.2359
+weatherstack,description_concise,5,5,1.0000,6.6588,0.1435,21.9157
+open_meteo,description_vague,5,5,1.0000,6.8076,0.1953,20.7456
+noaa_gridpoint,description_jargon,5,5,1.0000,7.6202,0.2418,21.1053
+accuweather,data_noisy,1,5,0.2000,7.9951,0.2911,23.2570
+weather_gov,data_broken,0,5,0.0000,8.1531,0.3454,20.4150
+darksky,data_inverted,0,5,0.0000,9.2157,0.3953,27.6624
+openweather,data_verbose,5,5,1.0000,7.4002,0.4412,27.8853
+weatherbit,data_minimal,3,5,0.6000,6.6269,0.4948,18.0106
+visual_crossing,data_wrong_location,0,5,0.0000,7.5646,0.5467,24.3939

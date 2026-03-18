@@ -1,2 +1,5 @@
+# python run_experiment.py \
+# --model openai/gpt-5-nano
+
 python run_experiment.py \
---wrappers 1
+--model openai/gpt-5-nano

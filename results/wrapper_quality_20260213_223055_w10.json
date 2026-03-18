@@ -1,0 +1,145 @@
+{
+  "judge_model": "openai/gpt-5-nano",
+  "results": [
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the temperature in Chicago right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It provides data for a different location (coordinates 21.3069, -157.8583) and 82\u00b0F vs the ground truth 53\u00b0F for Chicago; winds also differ (E vs SW), so not within \u00b13\u00b0F or the correct location."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How windy is it in San Francisco?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer cites coordinates not in San Francisco and states winds from the East (12 mph today, 8 mph tonight), which contradicts the ground truth of SF winds (~9 mph from the West) and overall wind pattern."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the forecast for Miami this weekend?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer targets a non-Miami location and today-only forecasts (82\u00b0F/71\u00b0F), which do not match the Miami weekend forecast (76\u00b0F/70\u00b0F) and timeframe."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it snow in Minneapolis tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer cites a forecast for coordinates 21.3069, -157.8583 (not Minneapolis) with 71\u00b0F and no snow, contradicting the ground truth of Minneapolis at 29\u00b0F, 0\u20135 mph S, partly cloudy."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather in New York?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The forecast is for a different location (coordinates point to Hawaii) and the temperatures/conditions do not match the New York ground truth."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather like in Boston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The forecast is for the wrong location (coordinates point to Hawaii) and temperatures/wind do not match Boston data (e.g., 82\u00b0F vs 35\u00b0F), violating the \u00b13\u00b0F tolerance."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is it cold in Denver today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nTemperature and wind/condition data do not match the ground truth (56\u00b0F vs 82\u00b0F, NNE 3\u20137 mph vs East 12 mph, and cloudy chance of rain versus unspecified)."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it rain in Seattle tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims no rain for Seattle tomorrow and provides unrelated temperatures (82\u00b0F today, 71\u00b0F tonight) instead of the 47\u00b0F with a chance of rain, contradicting the ground truth."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the forecast for Phoenix this week?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast is for coordinates 21.3069, -157.8583 (Honolulu) rather than Phoenix, so it does not reflect the Phoenix forecast."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the temperature in Los Angeles today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature (82\u00b0F vs 72\u00b0F, off by 10\u00b0F) and wind data (12 mph from East vs 5-10 mph SW) are incorrect for Los Angeles today."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the high temperature in Las Vegas today?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: High temp 82\u00b0F is 13\u00b0F off from the ground truth 69\u00b0F; wind direction/speed (east 12 mph) and sky condition (partly cloudy) also differ from the ground truth (north 7 mph, sunny)."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What are the weather conditions in Portland?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It references a different location and provides temperatures far from the ground truth (82\u00b0F/71\u00b0F vs 49\u00b0F/41\u00b0F) with differing precipitation."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer references coordinates far from Atlanta and does not provide the tomorrow forecast; it contradicts the ground truth regarding location and conditions."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is there a storm in Houston?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer uses a different location (Waikiki, Hawaii) and temperatures (82\u00b0F today, 71\u00b0F tonight) are more than 3\u00b0F off Houston's ground truth, making it incorrect."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How hot is it in Dallas right now?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nWrong location (coordinates point to Hawaii, not Dallas) and incorrect wind data; although temperature is within \u00b13\u00b0F, other fields contradict ground truth."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is it raining in Washington DC?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperatures and conditions are far off (ground truth: ~37\u00b0F sunny today; potential rain later) and the forecast describes rain later, which your answer omits, making it inconsistent with Washington DC data."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weekend forecast for Nashville?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer uses a different location (coordinates 21.3069, -157.8583) and provides unrelated today/tonight data, not the Nashville weekend forecast."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "How cold will it get in Detroit tonight?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Temperature is far from the ground truth (71\u00b0F vs 26\u00b0F; ~45\u00b0F difference) and wind direction differs (east vs WSW), violating the \u00b13\u00b0F requirement and consistency with wind data."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "Is there any severe weather in Oklahoma City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast is for a different location (Hawaii coordinates) and temperatures (82\u00b0F/71\u00b0F) are not within \u00b13\u00b0F of the ground truth (77\u00b0F/59\u00b0F); plus winds/conditions differ."
+    },
+    {
+      "wrapper": "visual_crossing",
+      "category": "data_wrong_location",
+      "query": "What's the weather forecast for Salt Lake City?",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe forecast has incorrect temperatures (82\u00b0F/71\u00b0F vs 49\u00b0F/30\u00b0F), wrong wind directions (E vs NW/SE), and mismatched conditions (partly cloudy vs sunny)."
+    }
+  ]
+}

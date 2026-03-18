@@ -1,0 +1,404 @@
+{
+  "model": "openai/gpt-5-nano",
+  "judge_model": "openai/gpt-5-nano",
+  "wrappers_used": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "timestamp": "20260213_223421",
+  "num_queries": 20,
+  "summary": {
+    "selection_probability": {
+      "weather_gov": 0.5,
+      "open_meteo": 0.1,
+      "nws_forecast": 0.25,
+      "noaa_gridpoint": 0.1,
+      "(no tool)": 0.05
+    },
+    "per_wrapper_accuracy": {
+      "weather_gov": 0.0,
+      "open_meteo": 1.0,
+      "nws_forecast": 1.0,
+      "noaa_gridpoint": 0.0,
+      "(no tool)": 0.0
+    },
+    "overall_accuracy": 0.35
+  },
+  "pretest_accuracy": {
+    "nws_forecast": 0.9,
+    "weatherstack": 1.0,
+    "open_meteo": 0.85,
+    "noaa_gridpoint": 0.85,
+    "accuweather": 0.25,
+    "weather_gov": 0.0,
+    "darksky": 0.05,
+    "openweather": 0.9,
+    "weatherbit": 0.4,
+    "visual_crossing": 0.0
+  },
+  "results": [
+    {
+      "query": "What's the weather in New York?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 40.7128,
+        "longitude": -74.006
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "I can\u2019t get the weather for New York right now\u2014the forecast service is temporarily unavailable. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "This Afternoon in New York: 37\u00b0F with NW winds 7\u201313 mph, sunny. Tonight: 29\u00b0F with W winds about 9 mph, mostly cloudy then a chance of snow showers.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer did not provide temperatures (within \u00b13\u00b0F) and claimed the forecast service was unavailable, which contradicts the ground truth for New York."
+    },
+    {
+      "query": "Will it rain in Seattle tomorrow?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "open_meteo",
+      "tool_args": {
+        "latitude": 47.6062,
+        "longitude": -122.3321
+      },
+      "tool_response": "Forecast for 47.6062, -122.3321:\n\nThis Afternoon:\nTemperature: 48\u00b0F\nWind: 6 mph SSW\nRain\n---\nTonight:\nTemperature: 40\u00b0F\nWind: 6 mph SSW\nRain\n---\nSaturday:\nTemperature: 47\u00b0F\nWind: 6 mph SSW\nChance Light Rain\n---\nSaturday Night:\nTemperature: 37\u00b0F\nWind: 3 mph NNE\nMostly Cloudy\n---\nSunday:\nTemperature: 46\u00b0F\nWind: 6 mph N\nMostly Sunny\n---\nSunday Night:\nTemperature: 34\u00b0F\nWind: 2 to 6 mph NE\nPartly Cloudy then Chance Rain And Snow\n---\nWashington's Birthday:\nTemperature: 44\u00b0F\nWind: 6 mph SSE\nRain And Snow Likely\n---\nMonday Night:\nTemperature: 36\u00b0F\nWind: 6 mph E\nChance Light Rain then Chance Rain And Snow\n---\nTuesday:\nTemperature: 45\u00b0F\nWind: 5 mph S\nChance Rain And Snow\n---\nTuesday Night:\nTemperature: 36\u00b0F\nWind: 5 mph S\nChance Light Rain then Chance Rain And Snow\n---\nWednesday:\nTemperature: 46\u00b0F\nWind: 7 mph SSW\nChance Rain And Snow then Rain And Snow Likely\n---\nWednesday Night:\nTemperature: 36\u00b0F\nWind: 7 mph SSW\nRain And Snow Likely\n---\nThursday:\nTemperature: 45\u00b0F\nWind: 8 mph SSW\nRain And Snow Likely\n---\nThursday Night:\nTemperature: 35\u00b0F\nWind: 5 to 8 mph SSW\nChance Rain And Snow\n---",
+      "all_tools_called": [
+        "open_meteo"
+      ],
+      "final_answer": "Yes. Tomorrow (Saturday) has a chance of light rain. The high will be around 47\u00b0F, with winds about 6 mph from the SSW.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Yes. Tomorrow (Saturday) in Seattle is forecast to be about 47\u00b0F with winds around 6 mph from the SSW. There is a chance of light rain.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (47\u00b0F) and wind (6 mph from SSW) match the ground truth within \u00b13\u00b0F, and the rain chance is correctly stated for Seattle tomorrow."
+    },
+    {
+      "query": "What's the temperature in Chicago right now?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 41.8781,
+        "longitude": -87.6298
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "The forecast service is temporarily unavailable (error). I can\u2019t retrieve the current temperature for Chicago right now. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Right now in Chicago (41.8781, -87.6298) the temperature this afternoon is 53\u00b0F. Winds are 10 to 15 mph from the SW.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims the service is unavailable and does not provide the reported 53\u00b0F for Chicago (with wind 10-15 mph SW), thus incorrect."
+    },
+    {
+      "query": "What's the forecast for Miami this weekend?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "nws_forecast",
+      "tool_args": {
+        "latitude": 25.7617,
+        "longitude": -80.1918
+      },
+      "tool_response": "Forecast for 25.7617, -80.1918:\n\nThis Afternoon:\nTemperature: 77\u00b0F\nWind: 8 mph E\nSunny\n---\nTonight:\nTemperature: 65\u00b0F\nWind: 7 mph NE\nMostly Clear\n---\nSaturday:\nTemperature: 76\u00b0F\nWind: 6 to 10 mph E\nMostly Sunny\n---\nSaturday Night:\nTemperature: 70\u00b0F\nWind: 10 to 14 mph SE\nPartly Cloudy\n---\nSunday:\nTemperature: 76\u00b0F\nWind: 15 mph SE\nPartly Sunny\n---\nSunday Night:\nTemperature: 70\u00b0F\nWind: 13 mph S\nMostly Cloudy then Chance Showers And Thunderstorms\n---\nWashington's Birthday:\nTemperature: 80\u00b0F\nWind: 13 mph SW\nChance Showers And Thunderstorms\n---\nMonday Night:\nTemperature: 64\u00b0F\nWind: 6 to 10 mph NW\nChance Rain Showers then Mostly Clear\n---\nTuesday:\nTemperature: 78\u00b0F\nWind: 5 to 8 mph N\nSunny\n---\nTuesday Night:\nTemperature: 67\u00b0F\nWind: 3 to 7 mph NE\nMostly Clear\n---\nWednesday:\nTemperature: 78\u00b0F\nWind: 2 to 7 mph E\nMostly Sunny\n---\nWednesday Night:\nTemperature: 66\u00b0F\nWind: 6 mph S\nMostly Clear\n---\nThursday:\nTemperature: 78\u00b0F\nWind: 3 to 7 mph S\nSunny\n---\nThursday Night:\nTemperature: 66\u00b0F\nWind: 3 to 7 mph SE\nMostly Clear\n---",
+      "all_tools_called": [
+        "nws_forecast"
+      ],
+      "final_answer": "This weekend in Miami: Saturday is around 76\u00b0F with 6\u201310 mph winds from the east and mostly sunny, dropping to about 70\u00b0F Saturday night with 10\u201314 mph SE winds and partly cloudy. Sunday is around 76\u00b0F with 15 mph SE winds and partly sunny, then Sunday night around 70\u00b0F with 13 mph S winds and a chance of showers and thunderstorms.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Miami this weekend: Saturday high 76\u00b0F with E winds 6\u201310 mph and mostly sunny; Saturday night 70\u00b0F with SE winds 10\u201314 mph and partly cloudy. Sunday high 76\u00b0F with SE winds 15 mph and partly sunny; Sunday night 70\u00b0F with S winds 13 mph, Mostly Cloudy then Chance Showers And Thunderstorms.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: All temperatures, wind speeds/directions, and weather conditions align with the ground truth for Saturday and Sunday."
+    },
+    {
+      "query": "Is it cold in Denver today?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "open_meteo",
+      "tool_args": {
+        "latitude": 39.7392,
+        "longitude": -104.9903
+      },
+      "tool_response": "Forecast for 39.7392, -104.9903:\n\nToday:\nTemperature: 56\u00b0F\nWind: 3 to 7 mph NNE\nMostly Cloudy then Chance Rain Showers\n---\nTonight:\nTemperature: 35\u00b0F\nWind: 3 to 7 mph NW\nRain Showers Likely\n---\nSaturday:\nTemperature: 57\u00b0F\nWind: 6 mph N\nSunny\n---\nSaturday Night:\nTemperature: 31\u00b0F\nWind: 5 mph S\nMostly Clear\n---\nSunday:\nTemperature: 66\u00b0F\nWind: 6 mph ESE\nMostly Sunny\n---\nSunday Night:\nTemperature: 35\u00b0F\nWind: 6 mph WSW\nPartly Cloudy\n---\nWashington's Birthday:\nTemperature: 67\u00b0F\nWind: 5 to 10 mph WNW\nPartly Sunny\n---\nMonday Night:\nTemperature: 39\u00b0F\nWind: 13 mph SW\nMostly Cloudy then Chance Light Rain\n---\nTuesday:\nTemperature: 58\u00b0F\nWind: 12 to 28 mph SW\nChance Light Rain then Slight Chance Rain And Snow\n---\nTuesday Night:\nTemperature: 32\u00b0F\nWind: 9 to 17 mph SW\nChance Rain And Snow\n---\nWednesday:\nTemperature: 55\u00b0F\nWind: 10 to 21 mph WSW\nChance Light Snow\n---\nWednesday Night:\nTemperature: 26\u00b0F\nWind: 9 to 14 mph WSW\nChance Light Snow\n---\nThursday:\nTemperature: 48\u00b0F\nWind: 9 to 20 mph WNW\nChance Light Snow\n---\nThursday Night:\nTemperature: 23\u00b0F\nWind: 7 to 14 mph W\nSlight Chance Light Snow\n---",
+      "all_tools_called": [
+        "open_meteo"
+      ],
+      "final_answer": "Today in Denver, the temperature is 56\u00b0F with winds of 3 to 7 mph NNE. It\u2019s not cold, with mostly cloudy skies and a chance of rain showers.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Today in Denver the forecasted temperature is 56\u00b0F. Winds are 3 to 7 mph NNE. It will be mostly cloudy with a chance of rain showers.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (56\u00b0F) matches ground truth, wind (3-7 mph NNE) and conditions (mostly cloudy with chances of rain) align; describing it as \"not cold\" is consistent with 56\u00b0F."
+    },
+    {
+      "query": "What's the weather like in Boston?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 42.3601,
+        "longitude": -71.0589
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry, I can\u2019t access the forecast right now\u2014the service is temporarily unavailable. Once it\u2019s back, I\u2019ll provide Boston\u2019s temperature and wind speed; would you like me to retry in a few minutes?",
+      "finish_reason": "tool_calls",
+      "ground_truth": "In Boston, this afternoon will be sunny with a high of 35\u00b0F and a 7 mph west wind. Tonight, temperatures drop to 22\u00b0F with a 7 mph west wind and it will be partly cloudy.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims data is unavailable, but ground truth provides Boston weather (35\u00b0F high with 7 mph W this afternoon and 22\u00b0F tonight with 7 mph W, partly cloudy), so the response is not correct."
+    },
+    {
+      "query": "Will it snow in Minneapolis tonight?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "nws_forecast",
+      "tool_args": {
+        "latitude": 44.9778,
+        "longitude": -93.265
+      },
+      "tool_response": "Forecast for 44.9778, -93.265:\n\nThis Afternoon:\nTemperature: 48\u00b0F\nWind: 0 mph \nSunny\n---\nTonight:\nTemperature: 29\u00b0F\nWind: 0 to 5 mph S\nPartly Cloudy\n---\nSaturday:\nTemperature: 48\u00b0F\nWind: 5 mph S\nSunny\n---\nSaturday Night:\nTemperature: 28\u00b0F\nWind: 0 to 5 mph W\nPartly Cloudy\n---\nSunday:\nTemperature: 48\u00b0F\nWind: 0 to 5 mph SW\nMostly Sunny\n---\nSunday Night:\nTemperature: 36\u00b0F\nWind: 5 mph SSW\nMostly Cloudy\n---\nWashington's Birthday:\nTemperature: 51\u00b0F\nWind: 5 mph NW\nSunny\n---\nMonday Night:\nTemperature: 34\u00b0F\nWind: 5 mph NE\nPartly Cloudy\n---\nTuesday:\nTemperature: 48\u00b0F\nWind: 5 to 10 mph E\nPartly Sunny then Chance Light Rain\n---\nTuesday Night:\nTemperature: 37\u00b0F\nWind: 10 to 15 mph E\nRain then Rain And Snow\n---\nWednesday:\nTemperature: 42\u00b0F\nWind: 10 mph NNE\nRain And Snow Likely\n---\nWednesday Night:\nTemperature: 27\u00b0F\nWind: 5 to 10 mph NNE\nChance Light Snow\n---\nThursday:\nTemperature: 36\u00b0F\nWind: 10 mph NE\nChance Light Snow\n---\nThursday Night:\nTemperature: 21\u00b0F\nWind: 5 to 10 mph N\nChance Light Snow\n---",
+      "all_tools_called": [
+        "nws_forecast"
+      ],
+      "final_answer": "No. Tonight in Minneapolis is forecast to be 29\u00b0F with winds 0 to 5 mph from the south and partly cloudy; there is no snow listed for tonight.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "No snow tonight. The forecast for Minneapolis shows a low of 29\u00b0F with winds 0\u20135 mph from the south and partly cloudy skies.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: The forecast details (Minneapolis, 29\u00b0F, 0\u20135 mph from the south, partly cloudy, no snow) match the ground truth."
+    },
+    {
+      "query": "How windy is it in San Francisco?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry, the forecast service is temporarily unavailable, so I can't retrieve wind speed for San Francisco right now. Once it's back, I can provide the wind speed and conditions. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "This afternoon in San Francisco, winds are about 9 mph from the west. The forecast shows winds mainly 2\u201310 mph, with strongest periods reaching up to 14 mph on Monday night and 12\u201315 mph on Tuesday.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: The answer claims the forecast service is unavailable, but ground truth provides specific wind speeds for San Francisco; the response should report a wind speed rather than saying data is unavailable."
+    },
+    {
+      "query": "What's the temperature in Los Angeles today?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 34.0522,
+        "longitude": -118.2437
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry, I can't fetch the temperature right now\u2014the forecast service is temporarily unavailable. Please try again later, and I\u2019ll provide the Los Angeles temperature as soon as the data is back.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "In Los Angeles today, the temperature this afternoon is 72\u00b0F. Tonight it will be 49\u00b0F.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It did not provide the temperature for Los Angeles and claimed the forecast service is unavailable."
+    },
+    {
+      "query": "Is there a storm in Houston?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 29.7604,
+        "longitude": -95.3698
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "The forecast service is temporarily unavailable, so I can't check Houston's storm status right now. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "There's no storm listed for today in Houston. This evening has fog with a slight chance of rain showers (64\u00b0F, wind 5\u201310 mph SE). A more active storm risk is forecast for Saturday into Saturday night, with showers and thunderstorms (Saturday: 74\u00b0F, wind 5\u201315 mph SE; Saturday night: 60\u00b0F, wind 10\u201315 mph SW).",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims the forecast service is unavailable and provides no Houston weather data, whereas ground truth gives specific conditions and temperatures for Houston today and a storm risk later."
+    },
+    {
+      "query": "What's the forecast for Phoenix this week?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "noaa_gridpoint",
+      "tool_args": {
+        "latitude": 33.4484,
+        "longitude": -112.074
+      },
+      "tool_response": "Forecast for 33.4484, -112.074:\n\nThis Afternoon:\nTemperature: 74\u00b0F\nWind: 5 to 10 mph WSW\nChance Rain Showers\n---\nTonight:\nTemperature: 51\u00b0F\nWind: 0 to 5 mph SSW\nSlight Chance Rain Showers then Partly Cloudy\n---\nSaturday:\nTemperature: 74\u00b0F\nWind: 0 to 5 mph SE\nSunny\n---\nSaturday Night:\nTemperature: 51\u00b0F\nWind: 0 mph \nMostly Clear\n---\nSunday:\nTemperature: 79\u00b0F\nWind: 0 to 5 mph SE\nMostly Sunny\n---\nSunday Night:\nTemperature: 54\u00b0F\nWind: 0 to 5 mph ESE\nPartly Cloudy\n---\nWashington's Birthday:\nTemperature: 76\u00b0F\nWind: 0 to 10 mph SSE\nMostly Cloudy then Chance Rain Showers\n---\nMonday Night:\nTemperature: 55\u00b0F\nWind: 5 to 10 mph SW\nRain Showers Likely\n---\nTuesday:\nTemperature: 70\u00b0F\nWind: 5 mph SW\nChance Rain Showers\n---\nTuesday Night:\nTemperature: 51\u00b0F\nWind: 0 to 5 mph S\nSlight Chance Rain Showers\n---\nWednesday:\nTemperature: 70\u00b0F\nWind: 0 to 10 mph SSW\nSlight Chance Rain Showers\n---\nWednesday Night:\nTemperature: 45\u00b0F\nWind: 0 to 10 mph W\nSlight Chance Rain Showers then Partly Cloudy\n---\nThursday:\nTemperature: 67\u00b0F\nWind: 0 to 5 mph W\nSunny\n---\nThursday Night:\nTemperature: 45\u00b0F\nWind: 0 to 5 mph NW\nMostly Clear\n---",
+      "all_tools_called": [
+        "noaa_gridpoint"
+      ],
+      "final_answer": "Phoenix will see daytime highs mainly in the mid-70s this week, including 74\u00b0F this afternoon and Saturday, with 79\u00b0F on Sunday. Overnight lows range from 45\u00b0F to 55\u00b0F, with 45\u00b0F on Wednesday and Thursday nights and 55\u00b0F Monday Night. Winds are generally light (0\u201310 mph) with occasional 5\u201310 mph periods from WSW, SE, SSE and SW, and there are rain chances on several days (this afternoon: Chance Rain Showers; tonight: Slight Chance Rain Showers; and again on Washington's Birthday, Tuesday, and Wednesday).",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Today in Phoenix: this afternoon 74\u00b0F with 5\u201310 mph WSW winds and a chance of rain showers; tonight 51\u00b0F with 0\u20135 mph SSW winds and a slight chance of rain showers then partly cloudy.\n\nSaturday will be 74\u00b0F and sunny (SE 0\u20135 mph); Saturday night 51\u00b0F, mostly clear; Sunday 79\u00b0F, mostly sunny (SE 0\u20135 mph).\n\nWashington's Birthday: 76\u00b0F with 0\u201310 mph SSE, mostly cloudy then a chance of rain showers; Monday night 55\u00b0F with 5\u201310 mph SW, rain showers likely; Tuesday 70\u00b0F with 5 mph SW and a chance of rain showers.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It lists 45\u00b0F overnight on Wednesday/Thursday (not in ground truth; nights are ~51\u201355\u00b0F) and assigns rain on a Wednesday not present in the Phoenix forecast."
+    },
+    {
+      "query": "How hot is it in Dallas right now?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 32.7767,
+        "longitude": -96.797
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry, I can\u2019t fetch the current Dallas temperature right now\u2014the forecast service is temporarily unavailable. Please check back in a few minutes and I\u2019ll provide the current temperature as soon as the data is back online.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Right now in Dallas it's 80\u00b0F. Winds are 5 to 10 mph from the SSE.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It claims data is unavailable and thus does not report the 80\u00b0F temperature for Dallas."
+    },
+    {
+      "query": "Will it be sunny in Atlanta tomorrow?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 33.749,
+        "longitude": -84.388
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry\u2014the forecast service is temporarily unavailable, so I can\u2019t check whether it will be sunny in Atlanta tomorrow or pull any temperatures or wind data. Please try again in a few minutes and I\u2019ll reassess.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Tomorrow in Atlanta it will be partly sunny. The high is forecast to be 61\u00b0F with winds around 5 mph from the SE.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claims data is unavailable, but the ground truth provides a specific forecast (partly sunny, high 61\u00b0F, SE winds), so it should report those details."
+    },
+    {
+      "query": "What are the weather conditions in Portland?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": null,
+      "tool_args": null,
+      "tool_response": null,
+      "all_tools_called": [],
+      "final_answer": "Which Portland do you mean: Portland, Oregon or Portland, Maine? And do you want current conditions or a forecast (hourly/daily)? If you\u2019d like, I can fetch for both.",
+      "finish_reason": "stop",
+      "ground_truth": "Portland forecast: This Afternoon is 49\u00b0F with light rain and a 6 mph south wind. Tonight's low is 41\u00b0F with light rain and a 2\u20136 mph south-southwest wind. Saturday is 49\u00b0F with a 2\u20136 mph north wind and a chance of light rain.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: It does not provide the forecast (49\u00b0F with rain and wind, etc.) for Portland and merely asks which Portland and what type of data, failing to match the ground truth."
+    },
+    {
+      "query": "Is it raining in Washington DC?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 38.9072,
+        "longitude": -77.0369
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "Sorry, the forecast service is temporarily unavailable, so I can\u2019t tell if it\u2019s raining in Washington DC right now. I don\u2019t have access to current conditions or numbers at the moment. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "This Afternoon is Sunny at 37\u00b0F with winds of 3 to 7 mph NW, so it\u2019s not raining right now. There is a forecast of light rain later: Sunday at 45\u00b0F with winds 1 to 5 mph E and Light Rain Likely, and Sunday Night at 36\u00b0F with 3 mph NE and Light Rain Likely.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe ground truth shows it is not raining right now in Washington DC (Sunny 37\u00b0F); the answer claims data is unavailable, which is incorrect."
+    },
+    {
+      "query": "What's the high temperature in Las Vegas today?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "nws_forecast",
+      "tool_args": {
+        "latitude": 36.1699,
+        "longitude": -115.1398
+      },
+      "tool_response": "Forecast for 36.1699, -115.1398:\n\nThis Afternoon:\nTemperature: 69\u00b0F\nWind: 7 mph N\nSunny\n---\nTonight:\nTemperature: 46\u00b0F\nWind: 2 to 6 mph WNW\nClear\n---\nSaturday:\nTemperature: 69\u00b0F\nWind: 2 to 8 mph E\nSunny\n---\nSaturday Night:\nTemperature: 46\u00b0F\nWind: 6 mph SSE\nMostly Cloudy\n---\nSunday:\nTemperature: 70\u00b0F\nWind: 3 to 14 mph SE\nPartly Sunny\n---\nSunday Night:\nTemperature: 47\u00b0F\nWind: 5 to 10 mph S\nMostly Cloudy\n---\nWashington's Birthday:\nTemperature: 67\u00b0F\nWind: 5 to 22 mph S\nRain Showers\n---\nMonday Night:\nTemperature: 45\u00b0F\nWind: 12 to 20 mph SSW\nRain Showers\n---\nTuesday:\nTemperature: 63\u00b0F\nWind: 12 to 23 mph SSW\nChance Rain Showers\n---\nTuesday Night:\nTemperature: 43\u00b0F\nWind: 10 to 18 mph SSW\nChance Rain Showers\n---\nWednesday:\nTemperature: 58\u00b0F\nWind: 10 to 16 mph SSW\nChance Rain Showers\n---\nWednesday Night:\nTemperature: 37\u00b0F\nWind: 6 to 10 mph WSW\nSlight Chance Rain Showers then Partly Cloudy\n---\nThursday:\nTemperature: 57\u00b0F\nWind: 5 to 8 mph N\nSunny\n---\nThursday Night:\nTemperature: 37\u00b0F\nWind: 7 mph W\nMostly Clear\n---",
+      "all_tools_called": [
+        "nws_forecast"
+      ],
+      "final_answer": "The high today in Las Vegas is 69\u00b0F. This Afternoon: 69\u00b0F with a 7 mph N wind and sunny.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "The high today in Las Vegas is 69\u00b0F (this afternoon). Winds are about 7 mph from the N.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperature (69\u00b0F) matches ground truth within \u00b13\u00b0F, wind (7 mph N) matches, location correct; additional condition \u201csunny\u201d is not contradicted."
+    },
+    {
+      "query": "How cold will it get in Detroit tonight?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "nws_forecast",
+      "tool_args": {
+        "latitude": 42.3314,
+        "longitude": -83.0458
+      },
+      "tool_response": "Forecast for 42.3314, -83.0458:\n\nThis Afternoon:\nTemperature: 38\u00b0F\nWind: 10 mph SW\nSunny\n---\nTonight:\nTemperature: 26\u00b0F\nWind: 3 to 9 mph WSW\nMostly Clear\n---\nSaturday:\nTemperature: 38\u00b0F\nWind: 3 mph ESE\nPartly Sunny\n---\nSaturday Night:\nTemperature: 27\u00b0F\nWind: 3 mph SE\nMostly Cloudy\n---\nSunday:\nTemperature: 40\u00b0F\nWind: 2 to 6 mph S\nPartly Sunny\n---\nSunday Night:\nTemperature: 30\u00b0F\nWind: 5 mph WSW\nPartly Cloudy\n---\nWashington's Birthday:\nTemperature: 43\u00b0F\nWind: 3 to 8 mph SSW\nPartly Sunny\n---\nMonday Night:\nTemperature: 35\u00b0F\nWind: 5 to 8 mph SW\nPartly Cloudy\n---\nTuesday:\nTemperature: 45\u00b0F\nWind: 6 mph SSE\nMostly Cloudy\n---\nTuesday Night:\nTemperature: 37\u00b0F\nWind: 6 to 12 mph E\nLight Rain Likely\n---\nWednesday:\nTemperature: 50\u00b0F\nWind: 14 mph S\nLight Rain Likely\n---\nWednesday Night:\nTemperature: 34\u00b0F\nWind: 12 mph WNW\nChance Rain And Snow\n---\nThursday:\nTemperature: 42\u00b0F\nWind: 10 mph NE\nChance Light Rain\n---\nThursday Night:\nTemperature: 30\u00b0F\nWind: 10 mph E\nChance Rain And Snow\n---",
+      "all_tools_called": [
+        "nws_forecast"
+      ],
+      "final_answer": "Tonight in Detroit, it will drop to 26\u00b0F. Winds will be 3 to 9 mph from the WSW, and it will be mostly clear.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "It will drop to 26\u00b0F tonight in Detroit. Winds will be 3 to 9 mph from the WSW, and it will be mostly clear.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Forecast matches ground truth for Detroit: 26\u00b0F, 3\u20139 mph winds from WSW, mostly clear tonight."
+    },
+    {
+      "query": "What's the weekend forecast for Nashville?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "nws_forecast",
+      "tool_args": {
+        "latitude": 36.16,
+        "longitude": -86.78
+      },
+      "tool_response": "Forecast for 36.16, -86.78:\n\nThis Afternoon:\nTemperature: 60\u00b0F\nWind: 5 mph SE\nSunny\n---\nTonight:\nTemperature: 36\u00b0F\nWind: 0 to 5 mph SE\nMostly Clear\n---\nSaturday:\nTemperature: 62\u00b0F\nWind: 0 to 5 mph SSE\nMostly Cloudy then Chance Rain Showers\n---\nSaturday Night:\nTemperature: 48\u00b0F\nWind: 5 to 10 mph SE\nRain Showers\n---\nSunday:\nTemperature: 56\u00b0F\nWind: 5 to 10 mph ENE\nRain Showers\n---\nSunday Night:\nTemperature: 47\u00b0F\nWind: 0 to 5 mph NNE\nMostly Cloudy\n---\nWashington's Birthday:\nTemperature: 65\u00b0F\nWind: 0 mph \nPartly Sunny\n---\nMonday Night:\nTemperature: 47\u00b0F\nWind: 0 to 5 mph SSE\nPartly Cloudy\n---\nTuesday:\nTemperature: 69\u00b0F\nWind: 5 to 10 mph S\nPartly Sunny\n---\nTuesday Night:\nTemperature: 57\u00b0F\nWind: 10 mph S\nMostly Cloudy\n---\nWednesday:\nTemperature: 74\u00b0F\nWind: 10 to 15 mph SW\nMostly Cloudy\n---\nWednesday Night:\nTemperature: 56\u00b0F\nWind: 5 to 10 mph SSW\nMostly Cloudy\n---\nThursday:\nTemperature: 75\u00b0F\nWind: 5 to 15 mph SSW\nMostly Cloudy\n---\nThursday Night:\nTemperature: 55\u00b0F\nWind: 5 to 10 mph SW\nSlight Chance Rain Showers\n---",
+      "all_tools_called": [
+        "nws_forecast"
+      ],
+      "final_answer": "For Nashville this weekend: Saturday will be 62\u00b0F with light SSE winds (0\u20135 mph) and Mostly Cloudy, then a Chance of Rain Showers; Saturday Night is 48\u00b0F with SE winds 5\u201310 mph and Rain Showers. Sunday is 56\u00b0F with ENE winds 5\u201310 mph and Rain Showers.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Weekend forecast for Nashville: Saturday daytime highs near 62\u00b0F with winds 0\u20135 mph SSE, mostly cloudy then a chance of rain showers, and Saturday night around 48\u00b0F with SE winds 5\u201310 mph and rain showers. Sunday daytime around 56\u00b0F with winds 5\u201310 mph ENE and rain showers, followed by Sunday night around 47\u00b0F with NNE winds 0\u20135 mph and mostly cloudy skies.",
+      "correct": true,
+      "judge_response": "VERDICT: CORRECT\nReason: Temperatures and conditions for Saturday and Sunday match ground truth within \u00b13\u00b0F, and wind/precipitation descriptions align; no location or data issues."
+    },
+    {
+      "query": "Is there any severe weather in Oklahoma City?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "noaa_gridpoint",
+      "tool_args": {
+        "latitude": 35.4676,
+        "longitude": -97.5164
+      },
+      "tool_response": "Forecast for 35.4676, -97.5164:\n\nThis Afternoon:\nTemperature: 77\u00b0F\nWind: 10 mph SSE\nChance Showers And Thunderstorms\n---\nTonight:\nTemperature: 59\u00b0F\nWind: 10 mph SSE\nChance Showers And Thunderstorms then Showers And Thunderstorms\n---\nSaturday:\nTemperature: 67\u00b0F\nWind: 12 mph SSW\nShowers And Thunderstorms\n---\nSaturday Night:\nTemperature: 49\u00b0F\nWind: 8 to 14 mph N\nRain Showers Likely then Mostly Cloudy\n---\nSunday:\nTemperature: 61\u00b0F\nWind: 5 to 14 mph N\nMostly Sunny\n---\nSunday Night:\nTemperature: 44\u00b0F\nWind: 3 to 7 mph SE\nMostly Clear\n---\nWashington's Birthday:\nTemperature: 71\u00b0F\nWind: 8 to 15 mph S\nSunny\n---\nMonday Night:\nTemperature: 56\u00b0F\nWind: 13 to 16 mph S\nPartly Cloudy\n---\nTuesday:\nTemperature: 78\u00b0F\nWind: 16 to 20 mph SSW\nMostly Cloudy\n---\nTuesday Night:\nTemperature: 54\u00b0F\nWind: 10 to 16 mph SW\nMostly Cloudy\n---\nWednesday:\nTemperature: 77\u00b0F\nWind: 10 to 16 mph SW\nPartly Sunny\n---\nWednesday Night:\nTemperature: 55\u00b0F\nWind: 15 mph SSW\nPartly Cloudy\n---\nThursday:\nTemperature: 74\u00b0F\nWind: 14 to 21 mph WSW\nMostly Sunny\n---\nThursday Night:\nTemperature: 43\u00b0F\nWind: 14 mph NW\nPartly Cloudy\n---",
+      "all_tools_called": [
+        "noaa_gridpoint"
+      ],
+      "final_answer": "No severe weather is indicated in the forecast for Oklahoma City. This Afternoon: 77\u00b0F, wind 10 mph SSE, Chance Showers And Thunderstorms; Tonight: 59\u00b0F, wind 10 mph SSE, Chance Showers And Thunderstorms. Saturday: 67\u00b0F, wind 12 mph SSW, Showers And Thunderstorms.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "No severe weather is indicated in the forecast for Oklahoma City. There\u2019s a chance of showers and thunderstorms this afternoon (77\u00b0F, wind 10 mph SSE) and tonight (59\u00b0F, wind 10 mph SSE), with continued chances Saturday (67\u00b0F, wind 12 mph SSW).",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nReason: Ground truth notes continued chances Saturday but does not specify thunderstorms; the answer claims Showers And Thunderstorms for Saturday, which conflicts."
+    },
+    {
+      "query": "What's the weather forecast for Salt Lake City?",
+      "model": "openai/gpt-5-nano",
+      "tool_selected": "weather_gov",
+      "tool_args": {
+        "latitude": 40.7608,
+        "longitude": -111.891
+      },
+      "tool_response": "ERROR: Service temporarily unavailable. Please try again later.",
+      "all_tools_called": [
+        "weather_gov"
+      ],
+      "final_answer": "I can\u2019t retrieve the Salt Lake City forecast right now\u2014the service is temporarily unavailable. Please try again later.",
+      "finish_reason": "tool_calls",
+      "ground_truth": "Salt Lake City forecast: This Afternoon: 49\u00b0F with a 6 mph NW wind and sunny. Tonight: 30\u00b0F with SE winds 2\u20136 mph, mostly clear. Saturday: 53\u00b0F with SSE winds 2\u20136 mph, mostly sunny.",
+      "correct": false,
+      "judge_response": "VERDICT: INCORRECT\nThe answer claimed the forecast is unavailable, but ground truth provides a Salt Lake City forecast."
+    }
+  ]
+}
